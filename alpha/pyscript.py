@@ -64,6 +64,7 @@ def GETv1():
           f"&relevanceLanguage=en" \
           f"&type=video" \
           f"&videoEmbeddable=true" \
+          f"&videoSyndicated=true" \
           f"&fields=items%2Fid%2FvideoId" \
           f"&key={key}"
     req = ajax.ajax()
@@ -105,6 +106,7 @@ def GETv2(videoIDs):
            ",viewCount))" \
           f"&key={key}"
     req = ajax.ajax()
+    print(url)
     req.bind('complete', DONEv2)
     req.open('GET', url, True)
     req.set_header('content-type', 'application/x-www-form-urlencoded')
@@ -124,11 +126,16 @@ def DONEv2(req):
             vIMG = video["snippet"]["thumbnails"]["medium"]["url"]
             cTITLE = video["snippet"]["channelTitle"]
             vVIEWS = video["statistics"]["viewCount"]
-            vLIKES = video["statistics"]["likeCount"]
-            vDISLIKES = video["statistics"]["dislikeCount"]
+            try:
+                vLIKES = video["statistics"]["likeCount"]
+                vDISLIKES = video["statistics"]["dislikeCount"]
+            except KeyError:
+                vLIKES = '?'
+                vDISLIKES = '?'
             print(f"{vID} -- VIDEO -- {vTITLE}")
             vRAWs.append(f"<li>{vID} -- VIDEO -- {vTITLE}</li>")
             vSTRs = "<br>".join(vRAWs)
+        doc["main"].attrs["style"] = f"grid-template-rows: 5% 0% 10% 2% 75% 8%;"
         doc["list"].html = f"<ul style='" \
                            f"height: 100%;" \
                            f"width: 100%;" \

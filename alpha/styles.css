@@ -49,13 +49,12 @@ a8"    `Y88  88P'   "Y8  88  a8"    `Y88
     bottom: 0%;
     height: 100%;
     grid-template-columns: auto;
-    grid-template-rows: 10% 10% 22% 10% 20% 20% 8%;
+    grid-template-rows: 10% 10% 22% 10% 40% 8%;
     grid-template-areas:
         "...... header header header ......"
         "...... ...... ...... ...... ......"
         "...... form   form   form   ......"
         "...... ...... ...... ...... ......"
-        "about  about  about  about  about "
         "about  about  about  about  about "
         "footer footer footer footer footer";}
 .grid-form-container {
@@ -67,7 +66,17 @@ a8"    `Y88  88P'   "Y8  88  a8"    `Y88
     bottom: 0%;
     grid-template-columns: repeat(3, 3fr);
     grid-template-areas:
-    "vorc search option";}
+        "vorc search option";}
+.grid-videos-container {
+    display: grid;
+    grid-area: form;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+    grid-template-columns: repeat(7, 7fr);
+    grid-template-areas:
+        "vorc search option";}
 .center {
     display:-webkit-box;
     -webkit-box-pack:center;
@@ -223,9 +232,9 @@ a8"     "8a  88P'   "Y8  a8"    `Y88  a8P_____88  88P'   "Y8
     background: #0066ff;
     border-radius: 50px;
     transition: all 0.4s ease;}
-.radio-buttons .first:checked ~ .slider {left: 4%; bottom: 55%;}
-.radio-buttons .second:checked ~ .slider {left: 36%; bottom: 55%;}
-.radio-buttons .third:checked ~ .slider {left: 64%; bottom: 55%;}
+.radio-buttons .first:checked ~ .slider {left: 4%; bottom: 45%;}
+.radio-buttons .second:checked ~ .slider {left: 36%; bottom: 45%;}
+.radio-buttons .third:checked ~ .slider {left: 64%; bottom: 45%;}
 .radio-buttons .forth:checked ~ .slider {left: 4%; bottom: 10%;}
 .radio-buttons .fith:checked ~ .slider {left: 34%; bottom: 10%}
 .radio-buttons .sixth:checked ~ .slider {left: 64%; bottom: 10%;}
