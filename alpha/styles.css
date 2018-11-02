@@ -74,9 +74,10 @@ a8"    `Y88  88P'   "Y8  88  a8"    `Y88
     left: 0%;
     right: 0%;
     bottom: 0%;
-    grid-template-columns: repeat(7, 7fr);
-    grid-template-areas:
-        "vorc search option";}
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    grid-template-columns: repeat(5, 5fr);
+    grid-template-rows: repeat(5, 5fr);}
 .center {
     display:-webkit-box;
     -webkit-box-pack:center;

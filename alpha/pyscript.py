@@ -58,7 +58,7 @@ def starter():
 def GETv1():
     url = f"https://www.googleapis.com/youtube/v3/search" \
           f"?part=snippet" \
-          f"&maxResults=20" \
+          f"&maxResults=25" \
           f"&order={order}" \
           f"&q={q}" \
           f"&relevanceLanguage=en" \
@@ -133,8 +133,9 @@ def DONEv2(req):
                 vLIKES = '?'
                 vDISLIKES = '?'
             print(f"{vID} -- VIDEO -- {vTITLE}")
-            vRAWs.append(f"<li>{vID} -- VIDEO -- {vTITLE}</li>")
-            vSTRs = "<br>".join(vRAWs)
+            vRAWs.append(
+                f"<li><img src='{vIMG}' height='120px' width='210px'><br>{vTITLE}</li>")
+            vSTRs = "".join(vRAWs)
         doc["main"].attrs["style"] = f"grid-template-rows: 5% 0% 10% 2% 75% 8%;"
         doc["list"].html = f"<ul style='" \
                            f"height: 100%;" \
@@ -143,6 +144,6 @@ def DONEv2(req):
                            f"overflow: hidden;" \
                            f"overflow-y: scroll;" \
                            f"list-style-type: none;" \
-                           f"'>" \
+                           f"'><div class='grid-videos-container'>" \
                            f"{vSTRs}"
-        doc["list"].html += "</ul>"
+        doc["list"].html += "</div></ul>"
