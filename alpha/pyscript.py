@@ -58,7 +58,7 @@ def starter():
 def GETv1():
     url = f"https://www.googleapis.com/youtube/v3/search" \
           f"?part=snippet" \
-          f"&maxResults=10" \
+          f"&maxResults=20" \
           f"&order={order}" \
           f"&q={q}" \
           f"&relevanceLanguage=en" \
@@ -114,6 +114,7 @@ def GETv2(videoIDs):
 def DONEv2(req):
     if req.status == 200 or req.status == 0:
         data = loads(req.text)
+        vRAWs = []
         for video in data.get("items", []):
             vID = video["id"]
             vDATE = video["snippet"]["publishedAt"]
@@ -126,4 +127,15 @@ def DONEv2(req):
             vLIKES = video["statistics"]["likeCount"]
             vDISLIKES = video["statistics"]["dislikeCount"]
             print(f"{vID} -- VIDEO -- {vTITLE}")
-            doc["list"].html += f"<li><p>{vID} -- VIDEO -- {vTITLE}</p></li>"
+            vRAWs.append(f"<li>{vID} -- VIDEO -- {vTITLE}</li>")
+            vSTRs = "<br>".join(vRAWs)
+        doc["list"].html = f"<ul style='" \
+                           f"height: 100%;" \
+                           f"width: 100%;" \
+                           f"padding-left: 0px;" \
+                           f"overflow: hidden;" \
+                           f"overflow-y: scroll;" \
+                           f"list-style-type: none;" \
+                           f"'>" \
+                           f"{vSTRs}"
+        doc["list"].html += "</ul>"
