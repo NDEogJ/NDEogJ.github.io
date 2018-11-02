@@ -114,7 +114,7 @@ def GETv2(videoIDs):
 def DONEv2(req):
     if req.status == 200 or req.status == 0:
         data = loads(req.text)
-        doc["list"].html = "<ul>"
+        doc["list"].html = "<ul class='list'>"
         for video in data.get("items", []):
             vID = video["id"]
             vDATE = video["snippet"]["publishedAt"]
