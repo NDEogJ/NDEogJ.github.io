@@ -48,14 +48,14 @@ a8"    `Y88  88P'   "Y8  88  a8"    `Y88
     bottom: 0%;
     height: 100%;
     grid-template-columns: auto;
-    grid-template-rows: 10% 10% 22% 10% fit-content auto 8%;
+    grid-template-rows: 10% 10% 22% 10% 20% 20% 8%;
     grid-template-areas:
         "...... header header header ......"
         "...... ...... ...... ...... ......"
         "...... form   form   form   ......"
         "...... ...... ...... ...... ......"
         "...... about  about  about  ......"
-        "...... about  about  about  ......"
+        "...... ...... ...... ...... ......"
         "footer footer footer footer footer";}
 .grid-form-container {
     display: grid;
@@ -64,7 +64,7 @@ a8"    `Y88  88P'   "Y8  88  a8"    `Y88
     left: 0%;
     right: 0%;
     bottom: 0%;
-    grid-template-columns: repeat(3, 3fr);
+    grid-template-columns: repeat(3, x3fr);
     grid-template-areas:
     "vorc search option";}
 .center {
@@ -77,6 +77,13 @@ a8"    `Y88  88P'   "Y8  88  a8"    `Y88
 .grid-option {grid-area: option;}
 .grid-about {grid-area: about;}
 .grid-footer {grid-area: footer; align-self: end;}
+.list {
+    position:relative;
+    min-height:1px;}
+.list div {
+    position:absolute;
+    max-height:100%;
+    overflow:auto;}
 /*
 8b       d8   ,adPPYba,   8b,dPPYba,   ,adPPYba,
 `8b     d8'  a8"     "8a  88P'   "Y8  a8"     ""
