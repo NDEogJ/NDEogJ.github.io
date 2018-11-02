@@ -114,7 +114,6 @@ def GETv2(videoIDs):
 def DONEv2(req):
     if req.status == 200 or req.status == 0:
         data = loads(req.text)
-        doc["list"].html = "<ul class='list'>"
         for video in data.get("items", []):
             vID = video["id"]
             vDATE = video["snippet"]["publishedAt"]
@@ -128,4 +127,3 @@ def DONEv2(req):
             vDISLIKES = video["statistics"]["dislikeCount"]
             print(f"{vID} -- VIDEO -- {vTITLE}")
             doc["list"].html += f"<li><p>{vID} -- VIDEO -- {vTITLE}</p></li>"
-        doc["list"].html += "</ul>"
