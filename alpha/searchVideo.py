@@ -28,10 +28,14 @@ except KeyError:
     order = None
     page = None
     pageNum = None
-
+try:
+    vId = doc.query["id"]
+except KeyError:
+    vId = None
 print(f"VorC  -- {vorc}")
 print(f"Q     -- {q}")
 print(f"Order -- {order}")
+print(f"Video -- {vId}")
 print(f"Page  -- {page}")
 print(f"Page# -- {pageNum}")
 print('')
@@ -50,9 +54,10 @@ def run():
     '''
     if vorc == "v":
         GETv1()
+    elif vId is not None:
+        GETv3()
     elif vorc is None:
-        doc["main"].attrs["style"] = f"display: grid;"
-        doc["preloader"].attrs["style"] = f"display: none;"
+        loaded(False)
 
 
 def GETv1():
@@ -134,18 +139,13 @@ Y8,        88  88                88      `8b   d8'      a8P'
           ",contentDetails" \
           "/duration" \
           ",snippet" \
-          "(channelId" \
-          ",channelTitle" \
-          ",description" \
-          ",publishedAt" \
+          "(channelTitle" \
           ",thumbnails" \
           "/medium" \
           "/url" \
           ",title)" \
           ",statistics" \
-          "(dislikeCount" \
-          ",likeCount" \
-          ",viewCount))" \
+          "(viewCount))" \
           f"&key={key}"
     req = ajax.ajax()
     print(url)
@@ -172,20 +172,13 @@ def DONEv2(req):
         for video in data.get("items", []):
             vID = video["id"]
             vLEN = video["contentDetails"]["duration"]
-            cID = video["snippet"]["channelId"]
             cTITLE = video["snippet"]["channelTitle"]
-            vDESC = video["snippet"]["description"]
-            vDATE = video["snippet"]["publishedAt"]
             vIMG = video["snippet"]["thumbnails"]["medium"]["url"]
             vTITLE = video["snippet"]["title"]
             try:
-                vVIEWS = video["statistics"]["viewCount"]
-                vLIKES = video["statistics"]["likeCount"]
-                vDISLIKES = video["statistics"]["dislikeCount"]
+                vVIEWS = format(int(video["statistics"]["viewCount"]), ",d")
             except KeyError:
                 vVIEWS = 'hidden'
-                vLIKES = 'hidden'
-                vDISLIKES = 'hidden'
 
             vLEN = vLEN.strip("PT").strip("S")
             vLEN = vLEN.replace("H", ":").replace("M", ":")
@@ -200,13 +193,12 @@ def DONEv2(req):
             if vLEN == '0:0':
                 vLEN = "LIVE"
             print(f"{vID} -- VIDEO -- {vLEN.split()} -- {vTITLE}")
-            vRAWs.append(f"<li class='video'>"
+            vRAWs.append(f"<li class='video'><a href='?id={vID}'>"
                          f"<div class='img'><img src='{vIMG}' height='120px' width='210px'>"
                          f"<time> {vLEN} </time></div>"
-                         f"<br>"
-                         f"<p>{vTITLE}</p>"
+                         f"<p class='title'>{vTITLE}</p></a>"
                          f"<p class='channel'>{cTITLE}"
-                         f"<br>{vVIEWS}</p>"
+                         f"<br>{vVIEWS} Views</p>"
                          f"</li>")
         global vSTRs
         vSTRs = "".join(vRAWs)
@@ -217,23 +209,20 @@ def DONEv2(req):
             prevPAGEnum = "1"
         elif pageNum != "1":
             prevPAGEnum = str(int(pageNum) - 1)
-
         show()
 
 
 def show():
     '''
- ad88888ba   88        88    ,ad8888ba,   I8,        8        ,8I
-d8"     "8b  88        88   d8"'    `"8b  `8b       d8b       d8'
-Y8,          88        88  d8'        `8b  "8,     ,8"8,     ,8"
-`Y8aaaaa,    88aaaaaaaa88  88          88   Y8     8P Y8     8P
-  `"""""8b,  88""""""""88  88          88   `8b   d8' `8b   d8'
-        `8b  88        88  Y8,        ,8P    `8a a8'   `8a a8'
-Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'
- "Y88888P"   88        88    `"Y8888Y"'        `8'       `8'
+ ad88888ba   88        88    ,ad8888ba,   I8,        8        ,8I                  ad888888b,
+d8"     "8b  88        88   d8"'    `"8b  `8b       d8b       d8'                 d8"     "88
+Y8,          88        88  d8'        `8b  "8,     ,8"8,     ,8"                          a8P
+`Y8aaaaa,    88aaaaaaaa88  88          88   Y8     8P Y8     8P    8b       d8         ,d8P"
+  `"""""8b,  88""""""""88  88          88   `8b   d8' `8b   d8'    `8b     d8'       a8P"
+        `8b  88        88  Y8,        ,8P    `8a a8'   `8a a8'      `8b   d8'      a8P'
+Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'        `8b,d8'      d8"
+ "Y88888P"   88        88    `"Y8888Y"'        `8'       `8'           "8"        88888888888
     '''
-    doc["main"].attrs["style"] = f"grid-template-rows: 5% 0% 10% 2% 75% 8%; display: grid;"
-    doc["preloader"].attrs["style"] = f"display: none;"
     doc["list"].html = f"<ul style='" \
                        f"height: 100%;" \
                        f"width: 100%;" \
@@ -259,9 +248,108 @@ Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'
                        f"<input type='hidden' name='pageNum' value='{nextPAGEnum}'>" \
                        f"<button type='submit' name='page' value='{nextPAGE}'>&#8250;</button>" \
                        f"</form></li>"
+    loaded(True)
 
 
-if __name__ == 'video':
+def GETv3():
+    '''
+  ,ad8888ba,   88888888888  888888888888                ad888888b,
+ d8"'    `"8b  88                88                    d8"     "88
+d8'            88                88                            a8P
+88             88aaaaa           88     8b       d8         aad8"
+88      88888  88"""""           88     `8b     d8'         ""Y8,
+Y8,        88  88                88      `8b   d8'             "8b
+ Y8a.    .a88  88                88       `8b,d8'      Y8,     a88
+  `"Y88888P"   88888888888       88         "8"         "Y888888P'
+    '''
+    url = f"https://www.googleapis.com/youtube/v3/videos" \
+          f"?part=snippet," \
+          "statistics," \
+          "contentDetails" \
+          f"&id={vId}" \
+          f"&fields=items" \
+          "(id" \
+          ",snippet" \
+          "(channelId" \
+          ",channelTitle" \
+          ",description" \
+          ",publishedAt" \
+          ",thumbnails" \
+          "/medium" \
+          "/url" \
+          ",title)" \
+          ",statistics" \
+          "(dislikeCount" \
+          ",likeCount" \
+          ",viewCount))" \
+          f"&key={key}"
+    req = ajax.ajax()
+    print(url)
+    req.bind('complete', DONEv3)
+    req.open('GET', url, True)
+    req.set_header('content-type', 'application/x-www-form-urlencoded')
+    req.send()
+
+
+def DONEv3(req):
+    '''
+88888888ba,      ,ad8888ba,    888b      88  88888888888                ad888888b,
+88      `"8b    d8"'    `"8b   8888b     88  88                        d8"     "88
+88        `8b  d8'        `8b  88 `8b    88  88                                a8P
+88         88  88          88  88  `8b   88  88aaaaa     8b       d8        aad8"
+88         88  88          88  88   `8b  88  88"""""     `8b     d8'        ""Y8,
+88         8P  Y8,        ,8P  88    `8b 88  88           `8b   d8'            "8b
+88      .a8P    Y8a.    .a8P   88     `8888  88            `8b,d8'     Y8,     a88
+88888888Y"'      `"Y8888Y"'    88      `888  88888888888     "8"        "Y888888P'
+    '''
+    data = loads(req.text)
+    global link
+    link = f'https://www.youtube-nocookie.com/embed/' \
+           f'{data["items"][0]["id"]}'
+    SHOWv3()
+
+
+def SHOWv3():
+    '''
+ ad88888ba   88        88    ,ad8888ba,   I8,        8        ,8I                  ad888888b,
+d8"     "8b  88        88   d8"'    `"8b  `8b       d8b       d8'                 d8"     "88
+Y8,          88        88  d8'        `8b  "8,     ,8"8,     ,8"                          a8P
+`Y8aaaaa,    88aaaaaaaa88  88          88   Y8     8P Y8     8P    8b       d8         aad8"
+  `"""""8b,  88""""""""88  88          88   `8b   d8' `8b   d8'    `8b     d8'         ""Y8,
+        `8b  88        88  Y8,        ,8P    `8a a8'   `8a a8'      `8b   d8'             "8b
+Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'        `8b,d8'      Y8,     a88
+ "Y88888P"   88        88    `"Y8888Y"'        `8'       `8'           "8"         "Y888888P'
+    '''
+    doc["list"].html = f"<div class='grid-video-container'>" \
+                       f"<div class='grid-embed'>" \
+                       f"   <iframe src='{link}' " \
+                       f"frameborder='0' allowfullscreen class='player'>" \
+                       f"   </iframe></div>" \
+                       f"<div class='grid-info'><br>info<br>WIP</div>" \
+                       f"<div class='grid-other'><br>other<br>WIP</div>" \
+                       f"</div>"
+    loaded(True)
+
+
+def loaded(grid):
+    '''
+88           ,ad8888ba,         db         88888888ba,    88888888888  88888888ba,
+88          d8"'    `"8b       d88b        88      `"8b   88           88      `"8b
+88         d8'        `8b     d8'`8b       88        `8b  88           88        `8b
+88         88          88    d8'  `8b      88         88  88aaaaa      88         88
+88         88          88   d8YaaaaY8b     88         88  88"""""      88         88
+88         Y8,        ,8P  d8""""""""8b    88         8P  88           88         8P
+88          Y8a.    .a8P  d8'        `8b   88      .a8P   88           88      .a8P
+88888888888  `"Y8888Y"'  d8'          `8b  88888888Y"'    88888888888  88888888Y"'
+    '''
+    if grid is True:
+        doc["main"].attrs["style"] = f"grid-template-rows: 5% 0% 10% 2% 75% 8%; display: grid;"
+    elif grid is False:
+        doc["main"].attrs["style"] = f"display: grid;"
+    doc["preloader"].attrs["style"] = f"display: none;"
+
+
+if __name__ == 'searchVideo':
     '''
  ad88888ba  888888888888    db         88888888ba  888888888888
 d8"     "8b      88        d88b        88      "8b      88
