@@ -40,7 +40,7 @@ a8"    `Y88  88P'   "Y8  88  a8"    `Y88
   "Y8bbdP"
 */
 .grid-container {
-    display: grid;
+    display: none;
     width: 100%;
     position: fixed;
     top: 0%;
@@ -77,7 +77,7 @@ a8"    `Y88  88P'   "Y8  88  a8"    `Y88
     grid-column-gap: 15px;
     grid-row-gap: 15px;
     grid-template-columns: repeat(5, 5fr);
-    grid-template-rows: repeat(5, 5fr);}
+    grid-template-rows: repeat(4, 5fr) 20px;}
 .center {
     display:-webkit-box;
     -webkit-box-pack:center;
@@ -88,7 +88,59 @@ a8"    `Y88  88P'   "Y8  88  a8"    `Y88
 .grid-option {grid-area: option;}
 .grid-about {grid-area: about;}
 .grid-footer {grid-area: footer; align-self: end;}
-
+/*
+88                                    88
+88                                    88
+88                                    88
+88   ,adPPYba,   ,adPPYYba,   ,adPPYb,88   ,adPPYba,  8b,dPPYba,
+88  a8"     "8a  ""     `Y8  a8"    `Y88  a8P_____88  88P'   "Y8
+88  8b       d8  ,adPPPPP88  8b       88  8PP"""""""  88
+88  "8a,   ,a8"  88,    ,88  "8a,   ,d88  "8b,   ,aa  88
+88   `"YbbdP"'   `"8bbdP"Y8   `"8bbdP"Y8   `"Ybbd8"'  88
+*/
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;}
+#loader {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #0044ff;
+    animation: spin 2s linear infinite;}
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #0066ff;
+    animation: spin 3s linear infinite;}
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #0088ff;
+    animation: spin 1.5s linear infinite;}
+@keyframes spin {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}}
 /*
 8b       d8   ,adPPYba,   8b,dPPYba,   ,adPPYba,
 `8b     d8'  a8"     "8a  88P'   "Y8  a8"     ""
@@ -212,6 +264,7 @@ a8"     "8a  88P'   "Y8  a8"    `Y88  a8P_____88  88P'   "Y8
     position: relative;
     background: rgba(0, 0, 0, 0.05);
     border-radius: 50px;
+    font-size: 90%;
     width: 70%;
     height: 50%;
     display: flex;
@@ -239,9 +292,9 @@ a8"     "8a  88P'   "Y8  a8"    `Y88  a8P_____88  88P'   "Y8
 .radio-buttons .forth:checked ~ .slider {left: 4%; bottom: 10%;}
 .radio-buttons .fith:checked ~ .slider {left: 34%; bottom: 10%}
 .radio-buttons .sixth:checked ~ .slider {left: 64%; bottom: 10%;}
-div.center.grid-option div label:nth-child(2) {top: 15%; left: 0%}
-div.center.grid-option div label:nth-child(4) {top: 15%; left: 30%;}
-div.center.grid-option div label:nth-child(6) {top: 15%; left: 60%;}
+div.center.grid-option div label:nth-child(2) {top: 20%; left: 0%}
+div.center.grid-option div label:nth-child(4) {top: 20%; left: 30%;}
+div.center.grid-option div label:nth-child(6) {top: 20%; left: 60%;}
 div.center.grid-option div label:nth-child(8) {bottom: 15%; left: 0%;}
 div.center.grid-option div label:nth-child(10) {bottom: 15%; left: 30%;}
 div.center.grid-option div label:nth-child(12) {bottom: 15%; left: 60%;}
@@ -287,6 +340,34 @@ div.center.grid-option div label:nth-child(12) {bottom: 15%; left: 60%;}
     padding: 0.5em;}
 .about a.block:hover, .about a:visited.block:hover {
     background: #ffffff;}
+/*
+             88           88
+             ""           88
+                          88
+8b       d8  88   ,adPPYb,88   ,adPPYba,   ,adPPYba,
+`8b     d8'  88  a8"    `Y88  a8P_____88  a8"     "8a
+ `8b   d8'   88  8b       88  8PP"""""""  8b       d8
+  `8b,d8'    88  "8a,   ,d88  "8b,   ,aa  "8a,   ,a8"
+    "8"      88   `"8bbdP"Y8   `"Ybbd8"'   `"YbbdP"'
+*/
+.video .img {
+    position: relative;
+    padding-top: 10px;}
+.video img {
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px #999999;}
+.video .img time {
+    position: absolute;
+    padding: 2px;
+    bottom: 8px;
+    right: 16px;
+    background-color: rgba(0, 0, 0, 0.55);
+    border-radius: 5px;}
+.video .channel {
+    text-align: left;
+    color: #aaaaaa;
+    font-size: 90%;
+}
 /*
    ad88
   d8"                              ,d

@@ -9,28 +9,28 @@
         <title>Clever | Applications</title>
         <link rel="icon" href="https://clever.com/favicon.ico" type="image/gif" sizes="16x16">
         <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.6.2/brython.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.6.2/brython_stdlib.js"></script>
     </head>
 
     <body onload="brython({debug:1})">
         <script type="text/python">
-            from pyscript import *
-            run()
+            from video import *
         </script>
-        <div id="main" class="grid-container" style="">
+        <div id="preloader">
+            <div id="loader"></div>
+        </div>
+        <div id="main" class="grid-container" style="background: #212121">
 
             <div class="grid-header">
                 <script src="header.js"></script>
             </div>
-
             <form class="grid-form-container" autocomplete="off">
                 <div class="center grid-vorc">
                     <div class="switch">
                         <input type="radio" class="switch-input" name="vorc" value="v" id="vnotc" checked>
                         <label for="vnotc" class="switch-label switch-label-v">Video</label>
-                        <input type="radio" class="switch-input" name="vorc" value="c" id="cnotv">
+                        <input type="radio" class="switch-input" name="vorc" value="c" id="cnotv" disabled>
                         <label for="cnotv" class="switch-label switch-label-c">Channel</label>
                         <span class="switch-selection"></span>
                     </div>
@@ -61,7 +61,8 @@
                     </div>
                 </div>
 
-                <input type="hidden" name="page" value="1">
+                <input type="hidden" name="page" value=" ">
+                <input type="hidden" name="pageNum" value="1">
 
             </form>
 
