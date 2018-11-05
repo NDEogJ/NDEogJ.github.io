@@ -308,7 +308,7 @@ def DONEv3(req):
            f'{data["items"][0]["id"]}' \
            f'?rel=0'
     title = data["items"][0]["snippet"]["title"]
-    channel = data["items"][0]["channelTitle"]
+    channel = data["items"][0]["snippet"]["channelTitle"]
     desc = data["items"][0]["snippet"]["description"]
     try:
         views = format(int(data["items"][0]["statistics"]["viewCount"]), ",d")
