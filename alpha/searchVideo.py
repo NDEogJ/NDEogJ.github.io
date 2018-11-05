@@ -305,7 +305,8 @@ def DONEv3(req):
     data = loads(req.text)
     global link
     link = f'https://www.youtube-nocookie.com/embed/' \
-           f'{data["items"][0]["id"]}'
+           f'{data["items"][0]["id"]}' \
+           f'?rel=0'
     SHOWv3()
 
 

@@ -369,11 +369,11 @@ div.center.grid-option div label:nth-child(12) {bottom: 15%; left: 60%;}
     position: relative;
     padding-top: 20px;}
 .video img:not(:hover) {
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0px 0px 15px #585858;
     transition: 0.3s ease;}
 .video img:hover {
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: 0px 0px 40px #999999;
     transition: 0.3s ease;}
 .video .img time {
