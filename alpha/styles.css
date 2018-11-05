@@ -411,6 +411,15 @@ div.center.grid-option div label:nth-child(12) {bottom: 15%; left: 60%;}
     height: 100%;
     border-radius: 15px;
 }
+.grid-info {
+    text-align: left;
+    padding-left: 20px;
+}
+.grid-info .title {
+    font-size: 120%;}
+.grid-info .views {
+    font-size: 80%;
+    color: #585858;}
 /*
    ad88
   d8"                              ,d

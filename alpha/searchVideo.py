@@ -303,10 +303,15 @@ def DONEv3(req):
 88888888Y"'      `"Y8888Y"'    88      `888  88888888888     "8"        "Y888888P'
     '''
     data = loads(req.text)
-    global link
+    global link, title, views
     link = f'https://www.youtube-nocookie.com/embed/' \
            f'{data["items"][0]["id"]}' \
            f'?rel=0'
+    title = data["items"][0]["snippet"]["title"]
+    try:
+        views = format(int(data["items"][0]["statistics"]["viewCount"]), ",d")
+    except KeyError:
+        views = 'hidden'
     SHOWv3()
 
 
@@ -326,7 +331,10 @@ Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'        `8b,d8'    
                        f"   <iframe src='{link}' " \
                        f"frameborder='0' allowfullscreen class='player'>" \
                        f"   </iframe></div>" \
-                       f"<div class='grid-info'><br>info<br>WIP</div>" \
+                       f"<div class='grid-info'>" \
+                       f"<p class='title'>{title}</p>" \
+                       f"<p class='views'>{views} Views</p>" \
+                       f"</div>" \
                        f"<div class='grid-other'><br>other<br>WIP</div>" \
                        f"</div>"
     loaded(True)
