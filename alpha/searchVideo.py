@@ -289,7 +289,7 @@ Y8,        88  88                88      `8b   d8'             "8b
     req.open('GET', url, True)
     req.set_header('content-type', 'application/x-www-form-urlencoded')
     req.send()
-
+ 
 
 def DONEv3(req):
     '''
@@ -314,10 +314,48 @@ def DONEv3(req):
         views = format(int(data["items"][0]["statistics"]["viewCount"]), ",d")
     except KeyError:
         views = 'hidden'
-    SHOWv3()
+    GETv4()
 
 
-def SHOWv3():
+def GETv4():
+    url = f"https://www.googleapis.com/youtube/v3/search" \
+          f"?part=snippet" \
+          f"&maxResults=10" \
+          f"&relatedToVideoId={vId}" \
+          f"&relevanceLanguage=en" \
+          f"&type=video" \
+          f"&videoEmbeddable=true" \
+          f"&fields=items" \
+          "(id" \
+          "%2FvideoId" \
+          "%2Csnippet" \
+          "(channelTitle" \
+          "%2Cthumbnails" \
+          "%2Fmedium" \
+          "%2Furl" \
+          "%2Ctitle))" \
+          f"&key={key}"
+    req = ajax.ajax()
+    print(url)
+    req.bind('complete', DONEv4)
+    req.open('GET', url, True)
+    req.set_header('content-type', 'application/x-www-form-urlencoded')
+    req.send()
+
+
+def DONEv4(req):
+    data = loads(req.text)
+    related = []
+    for video in data.get("items", []):
+        vID = video["id"]["videoId"]
+        vTITLE = video["snippet"]["title"]
+        vIMG = video["snippet"]["thumbnails"]["medium"]["url"]
+        cTITLE = video["snippet"]["channelTitle"]
+        related.append([vID, vTITLE, vIMG, cTITLE])
+    SHOWv3(related)
+
+
+def SHOWv3(raw):
     '''
  ad88888ba   88        88    ,ad8888ba,   I8,        8        ,8I                  ad888888b,
 d8"     "8b  88        88   d8"'    `"8b  `8b       d8b       d8'                 d8"     "88
@@ -328,6 +366,17 @@ Y8,          88        88  d8'        `8b  "8,     ,8"8,     ,8"                
 Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'        `8b,d8'      Y8,     a88
  "Y88888P"   88        88    `"Y8888Y"'        `8'       `8'           "8"         "Y888888P'
     '''
+    cooking = []
+    for video in raw:
+        vID = video[0]
+        vTITLE = video[1]
+        vIMG = video[2]
+        cTITLE = video[3]
+        cooking.append(f"<img src='{vIMG}'>"
+                       f"<p>{vTITLE}</p>")
+    print(cooking)
+    cooked = f"<ul class=''>{''.join(cooking)}</ul>"
+    print(cooked)
     doc["list"].html = f"<div class='grid-video-container'>" \
                        f"<div class='grid-embed'>" \
                        f"   <iframe src='{link}' " \
@@ -339,7 +388,7 @@ Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'        `8b,d8'    
                        f"<p class='channel'>{channel}</p>" \
                        f"<p class='desc'>{desc}</p>" \
                        f"</div>" \
-                       f"<div class='grid-other'><br>other<br>WIP</div>" \
+                       f"<div class='grid-videos-container'><br>{cooked}</div>" \
                        f"</div>"
     loaded(True)
 
