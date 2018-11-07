@@ -372,10 +372,11 @@ Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'        `8b,d8'    
         vTITLE = video[1]
         vIMG = video[2]
         cTITLE = video[3]
-        cooking.append(f"<img src='{vIMG}'>"
-                       f"<p>{vTITLE}</p>")
+        cooking.append(f"<li><img src='{vIMG}' href='?id={vID}'><div>"
+                       f"<a class='vtitle' href='?id={vID}'>{vTITLE}</a>"
+                       f"<p class='ctitle'>{cTITLE}</p></div></li>")
     print(cooking)
-    cooked = f"<ul class=''>{''.join(cooking)}</ul>"
+    cooked = f"<ul class='other'>{''.join(cooking)}</ul>"
     print(cooked)
     doc["list"].html = f"<div class='grid-video-container'>" \
                        f"<div class='grid-embed'>" \
@@ -388,7 +389,7 @@ Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'        `8b,d8'    
                        f"<p class='channel'>{channel}</p>" \
                        f"<p class='desc'>{desc}</p>" \
                        f"</div>" \
-                       f"<div class='grid-videos-container'><br>{cooked}</div>" \
+                       f"<div class='grid-other'>{cooked}</div>" \
                        f"</div>"
     loaded(True)
 
