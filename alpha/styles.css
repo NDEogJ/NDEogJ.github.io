@@ -446,7 +446,8 @@ div.center.grid-option div label:nth-child(12) {bottom: 15%; left: 60%;}
     padding-top: 20px;}
 .other li {
     display: flex;
-    padding-bottom: 15px;}
+    padding-bottom: 15px;
+    padding-right: 50px;}
 .other li img:not(:hover) {
     float: left;
     border-radius: 10px;

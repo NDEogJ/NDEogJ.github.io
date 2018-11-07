@@ -303,7 +303,8 @@ def DONEv3(req):
 88888888Y"'      `"Y8888Y"'    88      `888  88888888888     "8"        "Y888888P'
     '''
     data = loads(req.text)
-    global link, title, views, channel, desc
+    print(data)
+    global link, title, views, channel, desc, likes, dislikes
     link = f'https://www.youtube-nocookie.com/embed/' \
            f'{data["items"][0]["id"]}' \
            f'?rel=0'
@@ -314,6 +315,12 @@ def DONEv3(req):
         views = format(int(data["items"][0]["statistics"]["viewCount"]), ",d")
     except KeyError:
         views = 'hidden'
+    try: 
+        likes = format(int(data["items"][0]["statistics"]["likeCount"]), ",d")
+        dislikes = format(int(data["items"][0]["statistics"]["dislikeCount"]), ",d")
+    except KeyError:
+        likes = 'hidden'
+        dislikes = 'hidden'
     GETv4()
 
 
@@ -375,9 +382,7 @@ Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'        `8b,d8'    
         cooking.append(f"<li><img src='{vIMG}' href='?id={vID}'><div>"
                        f"<a class='vtitle' href='?id={vID}'>{vTITLE}</a>"
                        f"<p class='ctitle'>{cTITLE}</p></div></li>")
-    print(cooking)
     cooked = f"<ul class='other'>{''.join(cooking)}</ul>"
-    print(cooked)
     doc["list"].html = f"<div class='grid-video-container'>" \
                        f"<div class='grid-embed'>" \
                        f"   <iframe src='{link}' " \
@@ -385,7 +390,7 @@ Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'        `8b,d8'    
                        f"   </iframe></div>" \
                        f"<div class='grid-info'>" \
                        f"<p class='title'>{title}</p>" \
-                       f"<p class='views'>{views} Views</p>" \
+                       f"<p class='views'>{views} Views   &#128077; {likes}   &#128078; {dislikes}</p>" \
                        f"<p class='channel'>{channel}</p>" \
                        f"<p class='desc'>{desc}</p>" \
                        f"</div>" \
