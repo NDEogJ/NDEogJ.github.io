@@ -379,7 +379,7 @@ Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'        `8b,d8'    
         vTITLE = video[1]
         vIMG = video[2]
         cTITLE = video[3]
-        cooking.append(f"<li><img src='{vIMG}' href='?id={vID}'><div>"
+        cooking.append(f"<li><a href='?id={vID}'><img src='{vIMG}'><a/><div>"
                        f"<a class='vtitle' href='?id={vID}'>{vTITLE}</a>"
                        f"<p class='ctitle'>{cTITLE}</p></div></li>")
     cooked = f"<ul class='other'>{''.join(cooking)}</ul>"
