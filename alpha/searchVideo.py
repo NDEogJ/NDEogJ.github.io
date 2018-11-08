@@ -43,33 +43,59 @@ print('')
 
 def run():
     '''
-88888888ba   88        88  888b      88
-88      "8b  88        88  8888b     88
-88      ,8P  88        88  88 `8b    88
-88aaaaaa8P'  88        88  88  `8b   88
-88""""88'    88        88  88   `8b  88
-88    `8b    88        88  88    `8b 88
-88     `8b   Y8a.    .a8P  88     `8888
-88      `8b   `"Y8888Y"'   88      `888
+d8888b. db    db d8b   db
+88  `8D 88    88 888o  88
+88oobY' 88    88 88V8o 88
+88`8b   88    88 88 V8o88
+88 `88. 88b  d88 88  V888
+88   YD ~Y8888P' VP   V8P
     '''
     if vorc == "v":
         GETv1()
     elif vId is not None:
-        GETv3()
+        GETp1()
     elif vorc is None:
         loaded(False)
+'''
+'''
+'''
+'''
+'''
+'''
+'''
+ ad88888ba   88888888888         db         88888888ba     ,ad8888ba,   88        88
+d8"     "8b  88                 d88b        88      "8b   d8"'    `"8b  88        88
+Y8,          88                d8'`8b       88      ,8P  d8'            88        88
+`Y8aaaaa,    88aaaaa          d8'  `8b      88aaaaaa8P'  88             88aaaaaaaa88
+  `"""""8b,  88"""""         d8YaaaaY8b     88""""88'    88             88""""""""88
+        `8b  88             d8""""""""8b    88    `8b    Y8,            88        88
+Y8a     a8P  88            d8'        `8b   88     `8b    Y8a.    .a8P  88        88
+ "Y88888P"   88888888888  d8'          `8b  88      `8b    `"Y8888Y"'   88        88
 
 
+8b           d8  88  88888888ba,    88888888888    ,ad8888ba,
+`8b         d8'  88  88      `"8b   88            d8"'    `"8b
+ `8b       d8'   88  88        `8b  88           d8'        `8b
+  `8b     d8'    88  88         88  88aaaaa      88          88
+   `8b   d8'     88  88         88  88"""""      88          88
+    `8b d8'      88  88         8P  88           Y8,        ,8P
+     `888'       88  88      .a8P   88            Y8a.    .a8P
+      `8'        88  88888888Y"'    88888888888    `"Y8888Y"'
+'''
+'''
+'''
+'''
+'''
+'''
+'''
 def GETv1():
     '''
-  ,ad8888ba,   88888888888  888888888888                  88
- d8"'    `"8b  88                88                     ,d88
-d8'            88                88                   888888
-88             88aaaaa           88     8b       d8       88
-88      88888  88"""""           88     `8b     d8'       88
-Y8,        88  88                88      `8b   d8'        88
- Y8a.    .a88  88                88       `8b,d8'         88
-  `"Y88888P"   88888888888       88         "8"           88
+ d888b  d88888b d888888b      db    db       db
+88' Y8b 88'     `~~88~~'      88    88      o88
+88      88ooooo    88         Y8    8P       88
+88  ooo 88~~~~~    88         `8b  d8'       88
+88. ~8~ 88.        88          `8bd8'        88
+ Y888P  Y88888P    YP            YP          VP
     '''
     url = f"https://www.googleapis.com/youtube/v3/search" \
           f"?part=snippet" \
@@ -93,14 +119,12 @@ Y8,        88  88                88      `8b   d8'        88
 
 def DONEv1(req):
     '''
-88888888ba,      ,ad8888ba,    888b      88  88888888888                   88
-88      `"8b    d8"'    `"8b   8888b     88  88                          ,d88
-88        `8b  d8'        `8b  88 `8b    88  88                        888888
-88         88  88          88  88  `8b   88  88aaaaa     8b       d8       88
-88         88  88          88  88   `8b  88  88"""""     `8b     d8'       88
-88         8P  Y8,        ,8P  88    `8b 88  88           `8b   d8'        88
-88      .a8P    Y8a.    .a8P   88     `8888  88            `8b,d8'         88
-88888888Y"'      `"Y8888Y"'    88      `888  88888888888     "8"           88
+d8888b.  .d88b.  d8b   db d88888b      db    db       db
+88  `8D .8P  Y8. 888o  88 88'          88    88      o88
+88   88 88    88 88V8o 88 88ooooo      Y8    8P       88
+88   88 88    88 88 V8o88 88~~~~~      `8b  d8'       88
+88  .8D `8b  d8' 88  V888 88.           `8bd8'        88
+Y8888D'  `Y88P'  VP   V8P Y88888P         YP          VP
     '''
     rawIDs = []
     if req.status == 200 or req.status == 0:
@@ -120,14 +144,12 @@ def DONEv1(req):
 
 def GETv2(videoIDs):
     '''
-  ,ad8888ba,   88888888888  888888888888                ad888888b,
- d8"'    `"8b  88                88                    d8"     "88
-d8'            88                88                            a8P
-88             88aaaaa           88     8b       d8         ,d8P"
-88      88888  88"""""           88     `8b     d8'       a8P"
-Y8,        88  88                88      `8b   d8'      a8P'
- Y8a.    .a88  88                88       `8b,d8'      d8"
-  `"Y88888P"   88888888888       88         "8"        88888888888
+ d888b  d88888b d888888b      db    db      .d888b.
+88' Y8b 88'     `~~88~~'      88    88      VP  `8D
+88      88ooooo    88         Y8    8P         odD'
+88  ooo 88~~~~~    88         `8b  d8'       .88'
+88. ~8~ 88.        88          `8bd8'       j88.
+ Y888P  Y88888P    YP            YP         888888D
     '''
     url = f"https://www.googleapis.com/youtube/v3/videos" \
           f"?part=snippet," \
@@ -157,14 +179,12 @@ Y8,        88  88                88      `8b   d8'      a8P'
 
 def DONEv2(req):
     '''
-88888888ba,      ,ad8888ba,    888b      88  88888888888                ad888888b,
-88      `"8b    d8"'    `"8b   8888b     88  88                        d8"     "88
-88        `8b  d8'        `8b  88 `8b    88  88                                a8P
-88         88  88          88  88  `8b   88  88aaaaa     8b       d8        ,d8P"
-88         88  88          88  88   `8b  88  88"""""     `8b     d8'      a8P"
-88         8P  Y8,        ,8P  88    `8b 88  88           `8b   d8'     a8P'
-88      .a8P    Y8a.    .a8P   88     `8888  88            `8b,d8'     d8"
-88888888Y"'      `"Y8888Y"'    88      `888  88888888888     "8"       88888888888
+d8888b.  .d88b.  d8b   db d88888b      db    db      .d888b.
+88  `8D .8P  Y8. 888o  88 88'          88    88      VP  `8D
+88   88 88    88 88V8o 88 88ooooo      Y8    8P         odD'
+88   88 88    88 88 V8o88 88~~~~~      `8b  d8'       .88'
+88  .8D `8b  d8' 88  V888 88.           `8bd8'       j88.
+Y8888D'  `Y88P'  VP   V8P Y88888P         YP         888888D
     '''
     if req.status == 200 or req.status == 0:
         data = loads(req.text)
@@ -214,14 +234,12 @@ def DONEv2(req):
 
 def show():
     '''
- ad88888ba   88        88    ,ad8888ba,   I8,        8        ,8I                  ad888888b,
-d8"     "8b  88        88   d8"'    `"8b  `8b       d8b       d8'                 d8"     "88
-Y8,          88        88  d8'        `8b  "8,     ,8"8,     ,8"                          a8P
-`Y8aaaaa,    88aaaaaaaa88  88          88   Y8     8P Y8     8P    8b       d8         ,d8P"
-  `"""""8b,  88""""""""88  88          88   `8b   d8' `8b   d8'    `8b     d8'       a8P"
-        `8b  88        88  Y8,        ,8P    `8a a8'   `8a a8'      `8b   d8'      a8P'
-Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'        `8b,d8'      d8"
- "Y88888P"   88        88    `"Y8888Y"'        `8'       `8'           "8"        88888888888
+.d8888. db   db  .d88b.  db   d8b   db      db    db
+88'  YP 88   88 .8P  Y8. 88   I8I   88      88    88
+`8bo.   88ooo88 88    88 88   I8I   88      Y8    8P
+  `Y8b. 88~~~88 88    88 Y8   I8I   88      `8b  d8'
+db   8D 88   88 `8b  d8' `8b d8'8b d8'       `8bd8'
+`8888Y' YP   YP  `Y88P'   `8b8' `8d8'          YP
     '''
     doc["list"].html = f"<ul style='" \
                        f"height: 100%;" \
@@ -249,18 +267,46 @@ Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'        `8b,d8'    
                        f"<button type='submit' name='page' value='{nextPAGE}'>&#8250;</button>" \
                        f"</form></li>"
     loaded(True)
+'''
+'''
+'''
+'''
+'''
+'''
+'''
+ ad88888ba   88888888888         db         88888888ba     ,ad8888ba,   88        88
+d8"     "8b  88                 d88b        88      "8b   d8"'    `"8b  88        88
+Y8,          88                d8'`8b       88      ,8P  d8'            88        88
+`Y8aaaaa,    88aaaaa          d8'  `8b      88aaaaaa8P'  88             88aaaaaaaa88
+  `"""""8b,  88"""""         d8YaaaaY8b     88""""88'    88             88""""""""88
+        `8b  88             d8""""""""8b    88    `8b    Y8,            88        88
+Y8a     a8P  88            d8'        `8b   88     `8b    Y8a.    .a8P  88        88
+ "Y88888P"   88888888888  d8'          `8b  88      `8b    `"Y8888Y"'   88        88
 
 
-def GETv3():
+88888888ba   88                  db         8b        d8  88888888888  88888888ba
+88      "8b  88                 d88b         Y8,    ,8P   88           88      "8b
+88      ,8P  88                d8'`8b         Y8,  ,8P    88           88      ,8P
+88aaaaaa8P'  88               d8'  `8b         "8aa8"     88aaaaa      88aaaaaa8P'
+88""""""'    88              d8YaaaaY8b         `88'      88"""""      88""""88'
+88           88             d8""""""""8b         88       88           88    `8b
+88           88            d8'        `8b        88       88           88     `8b
+88           88888888888  d8'          `8b       88       88888888888  88      `8b
+'''
+'''
+'''
+'''
+'''
+'''
+'''
+def GETp1():
     '''
-  ,ad8888ba,   88888888888  888888888888                ad888888b,
- d8"'    `"8b  88                88                    d8"     "88
-d8'            88                88                            a8P
-88             88aaaaa           88     8b       d8         aad8"
-88      88888  88"""""           88     `8b     d8'         ""Y8,
-Y8,        88  88                88      `8b   d8'             "8b
- Y8a.    .a88  88                88       `8b,d8'      Y8,     a88
-  `"Y88888P"   88888888888       88         "8"         "Y888888P'
+ d888b  d88888b d888888b      d8888b.       db
+88' Y8b 88'     `~~88~~'      88  `8D      o88
+88      88ooooo    88         88oodD'       88
+88  ooo 88~~~~~    88         88~~~         88
+88. ~8~ 88.        88         88            88
+ Y888P  Y88888P    YP         88            VP
     '''
     url = f"https://www.googleapis.com/youtube/v3/videos" \
           f"?part=snippet," \
@@ -285,22 +331,20 @@ Y8,        88  88                88      `8b   d8'             "8b
           f"&key={key}"
     req = ajax.ajax()
     print(url)
-    req.bind('complete', DONEv3)
+    req.bind('complete', DONEp1)
     req.open('GET', url, True)
     req.set_header('content-type', 'application/x-www-form-urlencoded')
     req.send()
  
 
-def DONEv3(req):
+def DONEp1(req):
     '''
-88888888ba,      ,ad8888ba,    888b      88  88888888888                ad888888b,
-88      `"8b    d8"'    `"8b   8888b     88  88                        d8"     "88
-88        `8b  d8'        `8b  88 `8b    88  88                                a8P
-88         88  88          88  88  `8b   88  88aaaaa     8b       d8        aad8"
-88         88  88          88  88   `8b  88  88"""""     `8b     d8'        ""Y8,
-88         8P  Y8,        ,8P  88    `8b 88  88           `8b   d8'            "8b
-88      .a8P    Y8a.    .a8P   88     `8888  88            `8b,d8'     Y8,     a88
-88888888Y"'      `"Y8888Y"'    88      `888  88888888888     "8"        "Y888888P'
+d8888b.  .d88b.  d8b   db d88888b      d8888b.       db
+88  `8D .8P  Y8. 888o  88 88'          88  `8D      o88
+88   88 88    88 88V8o 88 88ooooo      88oodD'       88
+88   88 88    88 88 V8o88 88~~~~~      88~~~         88
+88  .8D `8b  d8' 88  V888 88.          88            88
+Y8888D'  `Y88P'  VP   V8P Y88888P      88            VP
     '''
     data = loads(req.text)
     print(data)
@@ -321,10 +365,18 @@ def DONEv3(req):
     except KeyError:
         likes = 'hidden'
         dislikes = 'hidden'
-    GETv4()
+    GETp2()
 
 
-def GETv4():
+def GETp2():
+    '''
+ d888b  d88888b d888888b      d8888b.      .d888b.
+88' Y8b 88'     `~~88~~'      88  `8D      VP  `8D
+88      88ooooo    88         88oodD'         odD'
+88  ooo 88~~~~~    88         88~~~         .88'
+88. ~8~ 88.        88         88           j88.
+ Y888P  Y88888P    YP         88           888888D
+    '''
     url = f"https://www.googleapis.com/youtube/v3/search" \
           f"?part=snippet" \
           f"&maxResults=10" \
@@ -344,13 +396,21 @@ def GETv4():
           f"&key={key}"
     req = ajax.ajax()
     print(url)
-    req.bind('complete', DONEv4)
+    req.bind('complete', DONEp2)
     req.open('GET', url, True)
     req.set_header('content-type', 'application/x-www-form-urlencoded')
     req.send()
 
 
-def DONEv4(req):
+def DONEp2(req):
+    '''
+d8888b.  .d88b.  d8b   db d88888b      d8888b.      .d888b.
+88  `8D .8P  Y8. 888o  88 88'          88  `8D      VP  `8D
+88   88 88    88 88V8o 88 88ooooo      88oodD'         odD'
+88   88 88    88 88 V8o88 88~~~~~      88~~~         .88'
+88  .8D `8b  d8' 88  V888 88.          88           j88.
+Y8888D'  `Y88P'  VP   V8P Y88888P      88           888888D
+    '''
     data = loads(req.text)
     related = []
     for video in data.get("items", []):
@@ -364,14 +424,12 @@ def DONEv4(req):
 
 def SHOWv3(raw):
     '''
- ad88888ba   88        88    ,ad8888ba,   I8,        8        ,8I                  ad888888b,
-d8"     "8b  88        88   d8"'    `"8b  `8b       d8b       d8'                 d8"     "88
-Y8,          88        88  d8'        `8b  "8,     ,8"8,     ,8"                          a8P
-`Y8aaaaa,    88aaaaaaaa88  88          88   Y8     8P Y8     8P    8b       d8         aad8"
-  `"""""8b,  88""""""""88  88          88   `8b   d8' `8b   d8'    `8b     d8'         ""Y8,
-        `8b  88        88  Y8,        ,8P    `8a a8'   `8a a8'      `8b   d8'             "8b
-Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'        `8b,d8'      Y8,     a88
- "Y88888P"   88        88    `"Y8888Y"'        `8'       `8'           "8"         "Y888888P'
+.d8888. db   db  .d88b.  db   d8b   db      d8888b.
+88'  YP 88   88 .8P  Y8. 88   I8I   88      88  `8D
+`8bo.   88ooo88 88    88 88   I8I   88      88oodD'
+  `Y8b. 88~~~88 88    88 Y8   I8I   88      88~~~
+db   8D 88   88 `8b  d8' `8b d8'8b d8'      88
+`8888Y' YP   YP  `Y88P'   `8b8' `8d8'       88
     '''
     cooking = []
     for video in raw:
@@ -397,6 +455,65 @@ Y8a     a8P  88        88   Y8a.    .a8P      `8a8'     `8a8'        `8b,d8'    
                        f"<div class='grid-other'>{cooked}</div>" \
                        f"</div>"
     loaded(True)
+'''
+'''
+'''
+'''
+'''
+'''
+'''
+ ad88888ba   88888888888         db         88888888ba     ,ad8888ba,   88        88
+d8"     "8b  88                 d88b        88      "8b   d8"'    `"8b  88        88
+Y8,          88                d8'`8b       88      ,8P  d8'            88        88
+`Y8aaaaa,    88aaaaa          d8'  `8b      88aaaaaa8P'  88             88aaaaaaaa88
+  `"""""8b,  88"""""         d8YaaaaY8b     88""""88'    88             88""""""""88
+        `8b  88             d8""""""""8b    88    `8b    Y8,            88        88
+Y8a     a8P  88            d8'        `8b   88     `8b    Y8a.    .a8P  88        88
+ "Y88888P"   88888888888  d8'          `8b  88      `8b    `"Y8888Y"'   88        88
+
+
+  ,ad8888ba,   88        88         db         888b      88  888b      88  88888888888  88
+ d8"'    `"8b  88        88        d88b        8888b     88  8888b     88  88           88
+d8'            88        88       d8'`8b       88 `8b    88  88 `8b    88  88           88
+88             88aaaaaaaa88      d8'  `8b      88  `8b   88  88  `8b   88  88aaaaa      88
+88             88""""""""88     d8YaaaaY8b     88   `8b  88  88   `8b  88  88"""""      88
+Y8,            88        88    d8""""""""8b    88    `8b 88  88    `8b 88  88           88
+ Y8a.    .a8P  88        88   d8'        `8b   88     `8888  88     `8888  88           88
+  `"Y8888Y"'   88        88  d8'          `8b  88      `888  88      `888  88888888888  88888888888
+'''
+'''
+'''
+'''
+'''
+'''
+'''
+def GETc1():
+    '''
+ d888b  d88888b d888888b       .o88b.       db
+88' Y8b 88'     `~~88~~'      d8P  Y8      o88
+88      88ooooo    88         8P            88
+88  ooo 88~~~~~    88         8b            88
+88. ~8~ 88.        88         Y8b  d8       88
+ Y888P  Y88888P    YP          `Y88P'       VP
+    '''
+    url = f"https://www.googleapis.com/youtube/v3/search" \
+          f"?part=snippet" \
+          f"&maxResults=20" \
+          f"&order={order}" \
+          f"&q={q}" \
+          f"&relevanceLanguage=en" \
+          f"&type=video" \
+          f"&videoEmbeddable=true" \
+          f"&pageToken={page}" \
+          f"&videoSyndicated=true" \
+          f"&fields=items/id/videoId" \
+          f",nextPageToken,prevPageToken" \
+          f"&key={key}"
+    req = ajax.ajax()
+    req.bind('complete', DONEv1)
+    req.open('GET', url, True)
+    req.set_header('content-type', 'application/x-www-form-urlencoded')
+    req.send()
 
 
 def loaded(grid):
