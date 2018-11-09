@@ -565,6 +565,7 @@ def GETc2(raw):
           f",viewCount))" \
           f",nextPageToken,prevPageToken" \
           f"&key={key}"
+    print(url)
     req = ajax.ajax()
     req.bind('complete', DONEc2)
     req.open('GET', url, True)
@@ -585,9 +586,11 @@ Y8888D'  `Y88P'  VP   V8P Y88888P       `Y88P'      888888D
         data = loads(req.text)
         vRAWs = []
         for video in data.get("items", []):
-            print(f"{video['id']} -- CHANNEL -- {video['snippet']['title']}")
-        vSTRs = "".join(vRAWs)
-        doc["list"].html = data
+            cID = video['id']
+            cTITLE = video['snippet']['title']
+            vRAWs.append(f"{cID} -- {cTITLE} -- ")
+        vSTRs = "\n".join(vRAWs)
+        doc["list"].html = vSTRs
         loaded(True)
 
 
