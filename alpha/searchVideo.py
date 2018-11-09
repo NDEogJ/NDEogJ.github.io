@@ -52,6 +52,8 @@ d8888b. db    db d8b   db
     '''
     if vorc == "v":
         GETv1()
+    elif vorc == "c":
+        GETc1()
     elif vId is not None:
         GETp1()
     elif vorc is None:
@@ -229,10 +231,10 @@ Y8888D'  `Y88P'  VP   V8P Y88888P         YP         888888D
             prevPAGEnum = "1"
         elif pageNum != "1":
             prevPAGEnum = str(int(pageNum) - 1)
-        show()
+        SHOWv()
 
 
-def show():
+def SHOWv():
     '''
 .d8888. db   db  .d88b.  db   d8b   db      db    db
 88'  YP 88   88 .8P  Y8. 88   I8I   88      88    88
@@ -419,10 +421,10 @@ Y8888D'  `Y88P'  VP   V8P Y88888P      88           888888D
         vIMG = video["snippet"]["thumbnails"]["medium"]["url"]
         cTITLE = video["snippet"]["channelTitle"]
         related.append([vID, vTITLE, vIMG, cTITLE])
-    SHOWv3(related)
+    SHOWp(related)
 
 
-def SHOWv3(raw):
+def SHOWp(raw):
     '''
 .d8888. db   db  .d88b.  db   d8b   db      d8888b.
 88'  YP 88   88 .8P  Y8. 88   I8I   88      88  `8D
@@ -502,18 +504,100 @@ def GETc1():
           f"&order={order}" \
           f"&q={q}" \
           f"&relevanceLanguage=en" \
-          f"&type=video" \
-          f"&videoEmbeddable=true" \
+          f"&type=channel" \
           f"&pageToken={page}" \
-          f"&videoSyndicated=true" \
-          f"&fields=items/id/videoId" \
+          f"&fields=items/id/channelId" \
           f",nextPageToken,prevPageToken" \
           f"&key={key}"
     req = ajax.ajax()
-    req.bind('complete', DONEv1)
+    req.bind('complete', DONEc1)
     req.open('GET', url, True)
     req.set_header('content-type', 'application/x-www-form-urlencoded')
     req.send()
+
+
+def DONEc1(req):
+    '''
+d8888b.  .d88b.  d8b   db d88888b       .o88b.       db
+88  `8D .8P  Y8. 888o  88 88'          d8P  Y8      o88
+88   88 88    88 88V8o 88 88ooooo      8P            88
+88   88 88    88 88 V8o88 88~~~~~      8b            88
+88  .8D `8b  d8' 88  V888 88.          Y8b  d8       88
+Y8888D'  `Y88P'  VP   V8P Y88888P       `Y88P'       VP
+    '''
+    rawIDs = []
+    if req.status == 200 or req.status == 0:
+        data = loads(req.text)
+        global nextPAGE
+        nextPAGE = data.get("nextPageToken")
+        global prevPAGE
+        prevPAGE = data.get("prevPageToken")
+        if prevPAGE is None:
+            prevPAGE = ' '
+        for raw in data.get("items"):
+            channelID = raw.get("id").get("channelId")
+            rawIDs.append(channelID)
+        channelIDs = ",".join(rawIDs)
+        GETc2(channelIDs)
+
+
+
+def GETc2(raw):
+    '''
+ d888b  d88888b d888888b       .o88b.      .d888b.
+88' Y8b 88'     `~~88~~'      d8P  Y8      VP  `8D
+88      88ooooo    88         8P              odD'
+88  ooo 88~~~~~    88         8b            .88'
+88. ~8~ 88.        88         Y8b  d8      j88.
+ Y888P  Y88888P    YP          `Y88P'      888888D
+    '''
+    url = f"https://www.googleapis.com/youtube/v3/channels" \
+          f"?part=snippet,statistics" \
+          f"&id={raw}" \
+          f"&fields=items" \
+          f"(id" \
+          f",snippet" \
+          f"(thumbnails" \
+          f"/medium" \
+          f"/url" \
+          f",title)" \
+          f",statistics" \
+          f"(subscriberCount" \
+          f",viewCount))" \
+          f",nextPageToken,prevPageToken" \
+          f"&key={key}"
+    req = ajax.ajax()
+    req.bind('complete', DONEc2)
+    req.open('GET', url, True)
+    req.set_header('content-type', 'application/x-www-form-urlencoded')
+    req.send()
+
+
+def DONEc2(req):
+    '''
+d8888b.  .d88b.  d8b   db d88888b       .o88b.      .d888b.
+88  `8D .8P  Y8. 888o  88 88'          d8P  Y8      VP  `8D
+88   88 88    88 88V8o 88 88ooooo      8P              odD'
+88   88 88    88 88 V8o88 88~~~~~      8b            .88'
+88  .8D `8b  d8' 88  V888 88.          Y8b  d8      j88.
+Y8888D'  `Y88P'  VP   V8P Y88888P       `Y88P'      888888D
+    '''
+    if req.status == 200 or req.status == 0:
+        data = loads(req.text)
+        vRAWs = []
+        for video in data.get("items", []):
+            print(video["id"])
+        global vSTRs
+        vSTRs = "".join(vRAWs)
+        global nextPAGEnum
+        nextPAGEnum = str(int(pageNum) + 1)
+        global prevPAGEnum
+        if pageNum == "1":
+            prevPAGEnum = "1"
+        elif pageNum != "1":
+            prevPAGEnum = str(int(pageNum) - 1)
+        doc["list"].html = data
+        loaded(True)
 
 
 def loaded(grid):
