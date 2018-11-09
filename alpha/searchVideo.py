@@ -589,7 +589,8 @@ Y8888D'  `Y88P'  VP   V8P Y88888P       `Y88P'      888888D
             cID = video['id']
             cTITLE = video['snippet']['title']
             cSUBS = format(int(video['statistics']['subscriberCount']), ',d')
-            vRAWs.append(f"{cID} -- {cTITLE} -- {cSUBS}<br>")
+            cVIEWS = fromat(int(video['statistics']['viewCount']), ',d')
+            vRAWs.append(f"{cID} -- {cTITLE} -- SUBS:{cSUBS} -- VIEWS:{cVIEWS}<br>")
         vSTRs = "".join(vRAWs)
         doc["list"].html = vSTRs
         loaded(True)
