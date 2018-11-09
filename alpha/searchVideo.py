@@ -388,13 +388,13 @@ def GETp2():
           f"&videoEmbeddable=true" \
           f"&fields=items" \
           "(id" \
-          "%2FvideoId" \
-          "%2Csnippet" \
+          "/videoId" \
+          ",snippet" \
           "(channelTitle" \
-          "%2Cthumbnails" \
-          "%2Fmedium" \
-          "%2Furl" \
-          "%2Ctitle))" \
+          ",thumbnails" \
+          "/medium" \
+          "/url" \
+          ",title))" \
           f"&key={key}"
     req = ajax.ajax()
     print(url)
@@ -584,16 +584,63 @@ Y8888D'  `Y88P'  VP   V8P Y88888P       `Y88P'      888888D
     '''
     if req.status == 200 or req.status == 0:
         data = loads(req.text)
-        vRAWs = []
+        cRAWs = []
         for video in data.get("items", []):
             cID = video['id']
             cTITLE = video['snippet']['title']
+            cIMG = video['snippet']['thumbnails']['medium']['url']
             cSUBS = format(int(video['statistics']['subscriberCount']), ',d')
             cVIEWS = format(int(video['statistics']['viewCount']), ',d')
-            vRAWs.append(f"{cID} -- {cTITLE} -- SUBS:{cSUBS} -- VIEWS:{cVIEWS}<br>")
-        vSTRs = "".join(vRAWs)
-        doc["list"].html = vSTRs
+            print(f"{cID} -- CHANNEL -- {cSUBS} -- {cTITLE}")
+            cRAWs.append(f"<li class='video'><a href='?cid={cID}'>"
+                         f"<div class='img'><img src='{cIMG}' height='160px' width='210px'></div>"
+                         f"<p class='title'>{cTITLE}</p></a>"
+                         f"<p class='channel'>"
+                         f"{cSUBS} Subscriber<br>{cVIEWS} Views</p>"
+                         f"</li>")
+        cSTRs = "".join(cRAWs)
+        SHOWc(cSTRs)
         loaded(True)
+
+
+
+
+
+def SHOWc(vSTRs):
+    '''
+.d8888. db   db  .d88b.  db   d8b   db      db    db
+88'  YP 88   88 .8P  Y8. 88   I8I   88      88    88
+`8bo.   88ooo88 88    88 88   I8I   88      Y8    8P
+  `Y8b. 88~~~88 88    88 Y8   I8I   88      `8b  d8'
+db   8D 88   88 `8b  d8' `8b d8'8b d8'       `8bd8'
+`8888Y' YP   YP  `Y88P'   `8b8' `8d8'          YP
+    '''
+    doc["list"].html = f"<ul style='" \
+                       f"height: 100%;" \
+                       f"width: 100%;" \
+                       f"padding-left: 0px;" \
+                       f"overflow: hidden;" \
+                       f"overflow-y: scroll;" \
+                       f"list-style-type: none;" \
+                       f"'><div class='grid-videos-container'>" \
+                       f"{vSTRs}" \
+                       f"<li></li><li></li><li>" \
+                       f"<form style='display: inline;'>" \
+                       f"<input type='hidden' name='vorc' value='{vorc}'>" \
+                       f"<input type='hidden' name='q' value='{q}'>" \
+                       f"<input type='hidden' name='order' value='{order}'>" \
+                       f"<input type='hidden' name='pageNum' value='{prevPAGE}'>" \
+                       f"<button type='submit' name='page' value='{prevPAGE}'>&#8249;</button>" \
+                       f"</form>" \
+                       f"<span style='display: inline;'> {pageNum} </span>" \
+                       f"<form style='display: inline;'>" \
+                       f"<input type='hidden' name='vorc' value='{vorc}'>" \
+                       f"<input type='hidden' name='q' value='{q}'>" \
+                       f"<input type='hidden' name='order' value='{order}'>" \
+                       f"<input type='hidden' name='pageNum' value='{nextPAGE}'>" \
+                       f"<button type='submit' name='page' value='{nextPAGE}'>&#8250;</button>" \
+                       f"</form></li>"
+    loaded(True)
 
 
 def loaded(grid):
