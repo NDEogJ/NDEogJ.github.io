@@ -528,9 +528,8 @@ Y8888D'  `Y88P'  VP   V8P Y88888P       `Y88P'       VP
     rawIDs = []
     if req.status == 200 or req.status == 0:
         data = loads(req.text)
-        global nextPAGE
+        global nextPAGE, prevPAGE
         nextPAGE = data.get("nextPageToken")
-        global prevPAGE
         prevPAGE = data.get("prevPageToken")
         if prevPAGE is None:
             prevPAGE = ' '
@@ -586,16 +585,8 @@ Y8888D'  `Y88P'  VP   V8P Y88888P       `Y88P'      888888D
         data = loads(req.text)
         vRAWs = []
         for video in data.get("items", []):
-            print(video["id"])
-        global vSTRs
+            print(f"{video['id']} -- CHANNEL -- {video['snippet']['title']}")
         vSTRs = "".join(vRAWs)
-        global nextPAGEnum
-        nextPAGEnum = str(int(pageNum) + 1)
-        global prevPAGEnum
-        if pageNum == "1":
-            prevPAGEnum = "1"
-        elif pageNum != "1":
-            prevPAGEnum = str(int(pageNum) - 1)
         doc["list"].html = data
         loaded(True)
 
