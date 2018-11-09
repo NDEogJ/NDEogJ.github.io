@@ -588,7 +588,7 @@ Y8888D'  `Y88P'  VP   V8P Y88888P       `Y88P'      888888D
         for video in data.get("items", []):
             cID = video['id']
             cTITLE = video['snippet']['title']
-            vRAWs.append(f"<p>{cID} -- {cTITLE} -- </p><br>")
+            vRAWs.append(f"{cID} -- {cTITLE} -- <br>")
         vSTRs = "".join(vRAWs)
         doc["list"].html = vSTRs
         loaded(True)
