@@ -528,9 +528,14 @@ Y8888D'  `Y88P'  VP   V8P Y88888P       `Y88P'       VP
     rawIDs = []
     if req.status == 200 or req.status == 0:
         data = loads(req.text)
-        global nextPAGE, prevPAGE
+        global nextPAGE, prevPAGE, nextPAGEnum, prevPAGEnum
         nextPAGE = data.get("nextPageToken")
         prevPAGE = data.get("prevPageToken")
+        nextPAGEnum = str(int(pageNum) + 1)
+        if pageNum == "1":
+            prevPAGEnum = "1"
+        elif pageNum != "1":
+            prevPAGEnum = str(int(pageNum) - 1)
         if prevPAGE is None:
             prevPAGE = ' '
         for raw in data.get("items"):
@@ -600,7 +605,6 @@ Y8888D'  `Y88P'  VP   V8P Y88888P       `Y88P'      888888D
                          f"</li>")
         cSTRs = "".join(cRAWs)
         SHOWc(cSTRs)
-        loaded(True)
 
 
 
@@ -629,7 +633,7 @@ db   8D 88   88 `8b  d8' `8b d8'8b d8'       `8bd8'
                        f"<input type='hidden' name='vorc' value='{vorc}'>" \
                        f"<input type='hidden' name='q' value='{q}'>" \
                        f"<input type='hidden' name='order' value='{order}'>" \
-                       f"<input type='hidden' name='pageNum' value='{prevPAGE}'>" \
+                       f"<input type='hidden' name='pageNum' value='{prevPAGEnum}'>" \
                        f"<button type='submit' name='page' value='{prevPAGE}'>&#8249;</button>" \
                        f"</form>" \
                        f"<span style='display: inline;'> {pageNum} </span>" \
@@ -637,7 +641,7 @@ db   8D 88   88 `8b  d8' `8b d8'8b d8'       `8bd8'
                        f"<input type='hidden' name='vorc' value='{vorc}'>" \
                        f"<input type='hidden' name='q' value='{q}'>" \
                        f"<input type='hidden' name='order' value='{order}'>" \
-                       f"<input type='hidden' name='pageNum' value='{nextPAGE}'>" \
+                       f"<input type='hidden' name='pageNum' value='{nextPAGEnum}'>" \
                        f"<button type='submit' name='page' value='{nextPAGE}'>&#8250;</button>" \
                        f"</form></li>"
     loaded(True)
