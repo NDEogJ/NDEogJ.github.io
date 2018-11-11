@@ -37,11 +37,16 @@ try:
     cId = doc.query["cid"]
 except KeyError:
     cId = None
+try:
+    pId = doc.query["pid"]
+except KeyError:
+    pId = None
 print(f"VorC   -- {vorc}")
 print(f"Q      -- {q}")
 print(f"Order  -- {order}")
 print(f"Video  -- {vId}")
 print(f"Channel-- {cId}")
+print(f"List   -- {pId}")
 print(f"Page   -- {page}")
 print(f"Page#  -- {pageNum}")
 print('')
@@ -306,7 +311,7 @@ Y8888D'  `Y88P'  VP   V8P Y88888P      88            VP
     global Vembed, Vtitle, Vviews, Vchannel, VchannelId, Vdesc, Vlikes, Vdislikes
     Vembed = f'https://www.youtube-nocookie.com/embed/' \
              f'{data["items"][0]["id"]}' \
-             f'?rel=0'
+             f'?list={pId}'
     Vtitle = data["items"][0]["snippet"]["title"]
     Vchannel = data["items"][0]["snippet"]["channelTitle"]
     VchannelId = data["items"][0]["snippet"]["channelId"]
@@ -624,7 +629,6 @@ d8888b.  .d88b.  d8b   db d88888b      db    db       db
 Y8888D'  `Y88P'  VP   V8P Y88888P      ~Y8888P'       VP
     '''
     data = loads(req.text)
-    print(data)
     data = data["items"][0]
     title = data["snippet"]["title"]
     description = data["snippet"]["description"]
@@ -643,11 +647,27 @@ Y8888D'  `Y88P'  VP   V8P Y88888P      ~Y8888P'       VP
         videos = format(int(data["statistics"]["videoCount"]), ",d")
     except KeyError:
         videos = 'hidden'
-    cooked = [title, description, img, banner, uploads, views, subs, videos]
-    SHOWu(cooked)
+    global Cooked
+    Cooked = [title, description, img, banner, uploads, views, subs, videos]
+    GETu2()
 
 
-def SHOWu(raw):
+def GETu2():
+    url = link(Url='u2', Id=Cooked[4])
+    req = ajax.ajax()
+    req.bind('complete', DONEu2)
+    req.open('GET', url, True)
+    req.set_header('content-type', 'application/x-www-form-urlencoded')
+    req.send()
+
+
+def DONEu2(req):
+    data = loads(req.text)
+    Vid = data["items"][0]["contentDetails"]["videoId"]
+    SHOWu(Vid)
+
+
+def SHOWu(vid):
     '''
 .d8888. db   db  .d88b.  db   d8b   db      db    db
 88'  YP 88   88 .8P  Y8. 88   I8I   88      88    88
@@ -656,23 +676,23 @@ def SHOWu(raw):
 db   8D 88   88 `8b  d8' `8b d8'8b d8'      88b  d88
 `8888Y' YP   YP  `Y88P'   `8b8' `8d8'       ~Y8888P'
     '''
-    title = raw[0]
-    description = raw[1]
-    img = raw[2]
-    banner = raw[3]
-    uploads = raw[4]
-    views = raw[5]
-    subs = raw[6]
-    videos = raw[7]
+    title = Cooked[0]
+    description = Cooked[1]
+    img = Cooked[2]
+    banner = Cooked[3]
+    uploads = Cooked[4]
+    views = Cooked[5]
+    subs = Cooked[6]
+    videos = Cooked[7]
     doc["list"].html = str(
-        f"{title}<br>"
-        f"{description}<br>"
-        f"{img}<br>"
-        f"{banner}<br>"
-        f"{uploads}<br>"
-        f"{views}<br>"
-        f"{subs}<br>"
-        f"{videos}<br>"
+        f"<div style='overflow-x: hidden;overflow-y: scroll;margin-top: -120px;hight:auto;'><img src='{banner}' width='100%'><br>"
+        f"<img class='Cimg' src='{img}' width='7%'>"
+        f"<p class='Ctitle'>{title}</p>"
+        f"<p class='Csubs'>{subs} Subscribers</p>"
+        f"<p class='Cviews'>{views} Views</p>"
+        f"<p class='Cvideos'>{videos} Videos</p>"
+        f"<p class='Cdesc'>{description}</p>"
+        f"<br><a href='?vid={vid}&pid={uploads}'>UPLOADS</a></div>"
     )
     loaded(True)
 

@@ -494,7 +494,33 @@ div.center.grid-option div label:nth-child(12) {bottom: 15%; left: 60%;}
     color: #cacaca;
     transition: 0.4s;
     text-decoration: none;}
-
+/*
+ .o88b. db   db  .d8b.  d8b   db d8b   db d88888b db
+d8P  Y8 88   88 d8' `8b 888o  88 888o  88 88'     88
+8P      88ooo88 88ooo88 88V8o 88 88V8o 88 88ooooo 88
+8b      88~~~88 88~~~88 88 V8o88 88 V8o88 88~~~~~ 88
+Y8b  d8 88   88 88   88 88  V888 88  V888 88.     88booo.
+ `Y88P' YP   YP YP   YP VP   V8P VP   V8P Y88888P Y88888P
+*/
+.Cimg {
+    float: left;
+    border-radius: 100px;
+    margin-left: 200px;
+    margin-right: 20px;}
+.Ctitle {
+    text-align: left;
+    margin: 0px;
+    font-size: 150%;}
+.Csubs, .Cviews, .Cvideos {
+    text-align: left;
+    margin: 0px;
+    color: #919191;}
+.Cdesc {
+    text-align: left;
+    margin-left: 200px;
+    margin-right: 200px;
+    color: #999999;
+}
 /*
    ad88
   d8"                              ,d

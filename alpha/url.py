@@ -149,7 +149,7 @@ def link(Url=None, Order=None, Q=None, Page=None, Id=None, p5=None, p6=None):
                     "contentDetails,"
                     "brandingSettings"
             f"&id={Id}"
-            f"&fields=items("
+             "&fields=items("
                             "brandingSettings/"
                                               "image/"
                                                      "bannerImageUrl,"
@@ -166,6 +166,19 @@ def link(Url=None, Order=None, Q=None, Page=None, Id=None, p5=None, p6=None):
                                         "subscriberCount,"
                                         "videoCount,"
                                         "viewCount))"
+            f"&key={key}")
+        print(url)
+        return url
+    elif Url == 'u2':
+        url = str(
+             "https://www.googleapis.com/youtube/v3/playlistItems"
+             "?part=contentDetails"
+             "&maxResults=1"
+            f"&playlistId={Id}"
+             "&fields="
+                      "items/"
+                             "contentDetails/"
+                                             "videoId"
             f"&key={key}")
         print(url)
         return url
