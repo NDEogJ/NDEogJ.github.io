@@ -376,6 +376,8 @@ div.center.grid-option div label:nth-child(12) {bottom: 15%; left: 60%;}
     border-radius: 10px;
     box-shadow: 0px 0px 40px #999999;
     transition: 0.3s ease;}
+.video .channel img:not(:hover) {border-radius: 100px;}
+.video .channel img:hover {border-radius: 25px;}
 .video .img time {
     position: absolute;
     padding: 2px;
@@ -435,6 +437,10 @@ div.center.grid-option div label:nth-child(12) {bottom: 15%; left: 60%;}
 .grid-info .desc {
    font-size: 85%;
    color: #ababab;}
+.grid-info .desc a {
+    color: #676767;
+    text-decoration: none;}
+.grid-info .desc a:hover {color: #cdcdcd;}
 .other {
     display: block;
     margin: 0px;
@@ -452,37 +458,39 @@ div.center.grid-option div label:nth-child(12) {bottom: 15%; left: 60%;}
     text-decoration: none;}
 .other li img:not(:hover) {
     float: left;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px #676767;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px #676767;
+    text-decoration: none;
     transition: 0.4s}
 .other li img:hover {
-    border-radius: 20px;
-    box-shadow: 0px 0px 40px #585858;
-    transition: 0.4s;
-    text-decoration: none;}
+    float: left;
+    border-radius: 10px;
+    box-shadow: 0px 0px 30px #919191;
+    text-decoration: none;
+    transition: 0.4s;}
 .other li .vtitle:not(:hover) {
     text-align: left;
     padding-right: 20px;
-    padding-left: 20px;
+    padding-left: 15px;
     color: #9f9f9f;
     transition: 0.4s;
     text-decoration: none;}
 .other li .vtitle:hover {
     text-align: left;
     padding-right: 20px;
-    padding-left: 20px;
+    padding-left: 15px;
     color: #ffffff;
     transition: 0.4s;
     text-decoration: none;}
 .other li .ctitle:not(:hover) {
-    text-align: left;
-    padding-left: 20px;
+    text-align: left !important;
+    padding-left: 15px;
     color: #585858;
     transition: 0.4s;
     text-decoration: none;}
 .other li .ctitle:hover {
     text-align: left;
-    padding-left: 20px;
+    padding-left: 15px;
     color: #cacaca;
     transition: 0.4s;
     text-decoration: none;}
