@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" style="height: 100%; width: 100%;overflow: hidden;">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="bogus541" content="bogus541">
+        <meta name="theme-color" content="#212121">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Clever | Applications</title>
+        <link rel="icon" href="https://clever.com/favicon.ico" type="image/gif" sizes="16x16">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <script>
+        let container = document.querySelector("all");
+        new ResizeSensor(container, function()
+        {
+            console.log("dimension changed:");
+            var objDiv = document.getElementById('all');
+            objDiv.scrollTop = objDiv.scrollHeight;
+        });
+    </script>
+    <body style="margin: 0px;background: #fefefe;height: 100%; width: 100%;">
+        <iframe id="all" src="http://colyseus-examples.herokuapp.com/01-chat.html" style="height: 100%; width: 100%;"></iframe>
+    </body>
+
+</html>
