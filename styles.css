@@ -354,7 +354,8 @@ db   8D 88.     88   88 88 `88. Y8b  d8 88   88
     position: absolute;
     text-align: center;
     transition: 0.2s;}
-.radio-buttons label:hover {
+.radio-buttons label:hover,
+.radio-buttons label:checked {
     color: #fefefe;
     transition: 0.2s;}
 .radio-buttons .slider {
