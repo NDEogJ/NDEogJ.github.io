@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Clever | Applications</title>
+    <link rel="icon" href="https://clever.com/favicon.ico" type="image/gif" sizes="16x16">
+    <meta name="bogus541" content="bogus541">
+<!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T4BNVC7');</script>
+<!-- End Google Tag Manager -->
+    <script src="brython.js"></script>
+    <script src="https://cdn.rawgit.com/brython-dev/brython/3.6.2/www/src/brython_stdlib.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body onload="brython({debug:0})">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4BNVC7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="content">
+        <ul class="snip1217">
+            <li class="current"><a href="javascript:window.location.reload(true)">Home</a></li>
+            <li><a href="github.html">Github</a></li>
+            <li><a href="multi.html">Multiplayer</a></li>
+            <li><a href="webgl.html">WebGL</a></li>
+            <li><a href="other.html">Other</a></li>
+        </ul>
+        <div class="youtube">
+            <script type="text/python">
+from browser import document as doc
+from browser import ajax, html, window
+import json
+videos = []
+def get(url):
+    req = ajax.ajax()
+    req.bind('complete',on_complete)
+    req.open('GET',url,True)
+    req.set_header('content-type','application/x-www-form-urlencoded')
+    req.send()
+def searchv():
+    get('https://www.googleapis.com/youtube/v3/search?q=' + input('Search For A Video:') + '&type=video&part=snippet&videoEmbeddable=True&key=AIzaSyAqR6xo2RuEiYDjp10UI3dPtiw-q7scJsI&maxResults=10')
+def searchc():
+    get('https://www.googleapis.com/youtube/v3/search?q=' + input('Search For A Channel:') + '&type=channel&part=snippet&key=AIzaSyAqR6xo2RuEiYDjp10UI3dPtiw-q7scJsI&maxResults=10')
+def on_complete(req):
+    if req.status==200 or req.status==0:
+        print(req.text)
+        data = req.text
+        cont = json.loads(data)
+        videos = []
+        for video_result in cont.get('items', []):
+            title = video_result['snippet']['title']
+            description = video_result['snippet']['description'] + '\n                                                                                                                                                                                                                                               '
+            img = video_result['snippet']['thumbnails']['medium']['url']
+            if video_result['id']['kind'] == 'youtube#video':
+                id = video_result['id']['videoId']
+                link = f'https://www.youtube-nocookie.com/embed/{id}'
+                print(title)
+                print(description)
+                print(img)
+                print(id)
+                print(link)
+                videos.append(f'<li><a href="{link}" target="_blank" class="image"><img src="{img}"/></a><div><a href="{link}" target="_blank"><h3>{title}</h3><p>{description}</p></a></div></li>')
+            elif video_result['id']['kind'] == 'youtube#channel':
+                id = video_result['id']['channelId']
+                videos.append(f'<li><a type="button" class="image" onclick="searchi(String(/{id}/))"><img src="{img}"/></a><div><a type="button" onclick="searchi(String(/{id}/))"><h3>{title}</h3><p>{description}</p></a></div></li>')
+    def searchi(inpp):
+        get(f'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId={inpp.replace("/", "")}&maxResults=10&q=' + input('Search For A Video:') + '&type=video&videoEmbeddable=true&key=AIzaSyAqR6xo2RuEiYDjp10UI3dPtiw-q7scJsI')
+    window.searchi = searchi
+    doc["main"].html = f'<ul id="videos">{"<br/>".join(videos)}</ul>'
+doc["main"].html = ''
+doc["main"].html = '<ul class="snip1488" id="searchv"><li><a type="button">Search For A Video</a></li></ul><ul class="snip1488" id="searchc"><li><a type="button">Search For A Channel</a></li></ul>'
+doc["searchv"].bind("click", searchv)
+doc["searchc"].bind("click", searchc)
+            </script>
+            <pre id="main"></pre>
+        </div>
+        <div><about>
+            Welcome To
+            <a href="https://ndeogj.github.io">NDEogJ</a>
+            <br><br>
+            Expect more updates soon.
+            <br><br>
+            You can view a preview of what the site will look like on the
+            <a href="alpha">Alpha Page</a>.
+            <br><br>
+            To find more advanced options, you can go to the
+            <a href="beta.html">Beta Page</a>.
+            <br><br>
+            These are just demos, they are only partially functional.
+            <br><br>
+            Everything in the alpha will be in the full release, when I'm done.
+            <br><br><br>
+        </about></div>
+        <!--Footer-->
+        <br>
+        <div class="footer">
+            <p>
+                This site is purely for educational purposes only.
+                I do not condone the use of this site.
+                I am not responsible for any consequences received from the use of this site.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -188,12 +188,9 @@ MM88MMM  ,adPPYba,    ,adPPYba,  MM88MMM  ,adPPYba,  8b,dPPYba,
     position: relative;
     height: 26px;
     width: 120px;
-    margin-left: 40%;
+    margin-left: 130px;
     background: rgba(0, 0, 0, 0.25);
     border-radius: 13px;}
-.channel .switch {
-    margin-left: 56%;
-    bottom: 15px;}
 .switch-label {
     position: relative;
     z-index: 2;
@@ -208,17 +205,12 @@ MM88MMM  ,adPPYba,    ,adPPYba,  MM88MMM  ,adPPYba,  8b,dPPYba,
 .switch-label:active {
     font-weight: bold;}
 .switch-label-off {
-    bottom: 32px;
+    bottom: 30px;
     padding-left: 2px;}
-.channel .switch-label-off {
-    bottom: 0;}
 .switch-label-on {
     padding-right: 2px;
-    bottom: 64px;
+    bottom: 60px;
     left: 60px;}
-.channel .switch-label-on {
-    bottom: 0;
-    left: 0;}
 .switch-input {
     display: none;}
 .switch-input:checked + .switch-label {
@@ -307,12 +299,10 @@ aa    ]8I  "8b,   ,aa  88,    ,88  88          "8a,   ,aa  88       88
     padding-left: 10px;}
 #qbutton {
     color: #ffffff;}
-.channel .material-textfield {
-    padding: 0;}
 .material-textfield {
     display: inline-block;
     height: 4rem;
-    padding-top: 0;}
+    padding-top: 2rem;}
 .material-textfield input {
     background: none;
     border: none;
@@ -336,8 +326,6 @@ aa    ]8I  "8b,   ,aa  88,    ,88  88          "8a,   ,aa  88       88
     position: relative;
     bottom: 15px;
     width: 100%;}
-.channel .material-textfield label {
-    bottom: 0px;}
 .material-textfield label::before {
     content: attr(data-content);
     position: relative;
@@ -397,7 +385,6 @@ aa    ]8I  "8b,   ,aa  88,    ,88  88          "8a,   ,aa  88       88
     color: #ffffff;
     cursor: pointer;
     padding: 0px 40px;
-    bottom: 35px;
     display: inline-block;
     text-transform: uppercase;
     line-height: 2.7em;
@@ -406,10 +393,8 @@ aa    ]8I  "8b,   ,aa  88,    ,88  88          "8a,   ,aa  88       88
     outline: none;
     position: relative;
     font-size: 16px;
+    right: 90px;
     transition: all 0.3s;}
-.channel .snip1339 {
-    right: 0px;
-    top: 40px;}
 .snip1339:after {
     content: "";
     position: absolute;
@@ -468,7 +453,7 @@ h1 {
     top: 0;
     left: 0;
     width: 100%;
-    height: 75%;}
+    height: 90%;}
 .overlay {
     position: fixed;
     top: 0;
@@ -514,60 +499,81 @@ h1 {
     .box{width: 70%;}
     .popup{width: 70%;}}
 /*
-                                  88
-                                  88
-                                  88
- ,adPPYba,   8b,dPPYba,   ,adPPYb,88   ,adPPYba,  8b,dPPYba,
-a8"     "8a  88P'   "Y8  a8"    `Y88  a8P_____88  88P'   "Y8
-8b       d8  88          8b       88  8PP"""""""  88
-"8a,   ,a8"  88          "8a,   ,d88  "8b,   ,aa  88
- `"YbbdP"'   88           `"8bbdP"Y8   `"Ybbd8"'  88
+                                                           88
+                                                           88
+                                                           88
+,adPPYba,   ,adPPYba,  ,adPPYYba,  8b,dPPYba,   ,adPPYba,  88,dPPYba,
+I8[    ""  a8P_____88  ""     `Y8  88P'   "Y8  a8"     ""  88P'    "8a
+ `"Y8ba,   8PP"""""""  ,adPPPPP88  88          8b          88       88
+aa    ]8I  "8b,   ,aa  88,    ,88  88          "8a,   ,aa  88       88
+`"YbbdP"'   `"Ybbd8"'  `"8bbdP"Y8  88           `"Ybbd8"'  88       88
 */
-.radio-buttons {
-    position: relative;
-    background: rgba(0, 0, 0, 0.45);
-    border-radius: 50px;
-    width: 100%;
-    height: 2em;
-    display: flex;
-    bottom: 35px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;}
-.channel .radio-buttons {
-    top: 10px;
-    left:  150px;
-    width: 50%;}
-.radio-buttons input[type="radio"] {
-    display: none;}
-.radio-buttons label {
-    cursor: pointer;
-    z-index: 1;
-    width: 100px;
-    color: #fff;
+.snip1488 {
+    font-family: 'Roboto', Arial, sans-serif;
     text-align: center;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);}
-.radio-buttons .slider {
+    text-transform: uppercase;
+    font-weight: 500;
+    transform: translateZ(0);}
+.snip1488 * {
+    box-sizing: border-box;}
+.snip1488 li {
+    display: inline-block;
+    list-style: outside none none;
+    margin: 0.5em 1em;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;}
+.snip1488 li:before, .snip1488 li:after {
+    display: block;}
+.snip1488 li:before {
+    bottom: 0%;}
+.snip1488 li:after {
+    bottom: 50%;}
+.snip1488 a {
+    backface-visibility: hidden;
+    color: #ffffff99;
+    display: block;
+    padding: 0.5em 1em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;}
+.snip1488 a:hover {
+    color: #ffffff;}
+.snip1488 a:before {
+    bottom: 25%;}
+.snip1488 a:after {
+    bottom: 75%;}
+.snip1488 li:before, .snip1488 li:after,
+.snip1488 a:before, .snip1488 a:after {
+    background-color: #0066ff;
     position: absolute;
-    width: 100px;
-    height: 1.7em;
-    border-radius: 50px;
-    transition: all 0.4s ease;}
-.radio-buttons .first:checked ~ .slider {
-    background: #0066ff;
-    left: 0.5%;}
-.radio-buttons .second:checked ~ .slider {
-    background: #0066ff;
-    left: 17%;}
-.radio-buttons .third:checked ~ .slider {
-    background: #0066ff;
-    left: 33%;}
-.radio-buttons .forth:checked ~ .slider {
-    background: #0066ff;
-    left: 50%;}
-.radio-buttons .fith:checked ~ .slider {
-    background: #0066ff;
-    left: 67%;}
-.radio-buttons .sixth:checked ~ .slider {
-    background: #0066ff;
-    left: 83%;}
+    height: 25%;
+    left: 50%;
+    right: 50%;
+    content: '';
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.3s ease;}
+.snip1488 li:before {
+    transition-delay: 0.15s;}
+.snip1488 li:after {
+    transition-delay: 0.05s;}
+.snip1488 a:before {
+    transition-delay: 0.1s;}
+.snip1488 a:after {
+    transition-delay: 0s;}
+.snip1488 li:hover:before, .snip1488 li.current:before,
+.snip1488 li:hover:after, .snip1488 li.current:after,
+.snip1488 li:hover a:before, .snip1488 li.current a:before,
+.snip1488 li:hover a:after, .snip1488 li.current a:after {
+    left: 0;
+    right: 0;
+    opacity: 1;}
+.snip1488 li:hover:before, .snip1488 li.current:before {
+    transition-delay: 0.3s;}
+.snip1488 li:hover:after, .snip1488 li.current:after {
+    transition-delay: 0.1s;}
+.snip1488 li:hover a:before, .snip1488 li.current a:before {
+    transition-delay: 0.2s;}
+.snip1488 li:hover a:after, .snip1488 li.current a:after {
+    transition-delay: 0s;}
