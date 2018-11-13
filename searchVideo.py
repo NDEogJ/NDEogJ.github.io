@@ -698,7 +698,7 @@ db   8D 88   88 `8b  d8' `8b d8'8b d8'      88b  d88
     subs = Cooked[6]
     videos = Cooked[7]
     doc["list"].html = str(
-        f"<div style='margin-top: 0;hight:auto;'>"
+        f"<div style='margin-top: 5%;height:90%;overflow-y: scroll;'>"
         f"<img src='{banner}' width='100%'>"
         f"<img class='Cimg' src='{img}' width='7%'>"
         f"<p class='Ctitle'>{title}</p>"
@@ -706,8 +706,7 @@ db   8D 88   88 `8b  d8' `8b d8'8b d8'      88b  d88
         f"<p class='Cviews'>{views} Views</p>"
         f"<p class='Cvideos'>{videos} Videos</p>"
         f"<a class='snip1339' href='?vid={vid}&pid={uploads}'>UPLOADS</a>"
-        f"<p class='Cdesc'>{description}</p></div>"
-    )
+        f"<p class='Cdesc'><br>{description}</p></div>")
     loaded(True)
 
 
@@ -726,7 +725,8 @@ def loaded(grid):
         if cId is None:
             doc["main"].attrs["style"] = f"grid-template-rows: 5% 0% 10% 2% 75% 8%; display: grid;"
         elif cId is not None:
-            doc["main"].attrs["style"] = f"grid-template-rows: 5% 0% 10% 2% 75% 8%; display: grid;"
+            doc["main"].attrs["style"] = f"grid-template-rows: 5% 0% 0% 0% 87% 8%; display: grid;"
+            doc["grid-form-container"].attrs["style"] = f"display: none;"
     elif grid is False:
         doc["main"].attrs["style"] = f"display: grid;"
     doc["preloader"].attrs["style"] = f"display: none;"

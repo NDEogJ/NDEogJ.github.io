@@ -6,7 +6,7 @@ d88888b  .d88b.  d8b   db d888888b
 88      `8b  d8' 88  V888    88
 YP       `Y88P'  VP   V8P    YP
 */
-@import url(https://fonts.googleapis.com/css?family=Ubuntu);
+@import url(https://fonts.googleapis.com/css?family=Raleway:500);
 /*
 d8888b.  .d88b.  d8888b. db    db
 88  `8D .8P  Y8. 88  `8D `8b  d8'
@@ -18,7 +18,7 @@ Y8888P'  `Y88P'  Y8888D'    YP
 body {
     background: #212121;
     text-align: center;
-    font-family: 'Ubuntu';
+    font: 1em 'Raleway', sans-serif;
     color: #fefefe;}
 
 /*
@@ -350,12 +350,13 @@ db   8D 88.     88   88 88 `88. Y8b  d8 88   88
     z-index: 1;
     line-height: 100%;
     width: 40%;
+    font-size: 1.1em;
     color: #919191;
     position: absolute;
     text-align: center;
     transition: 0.2s;}
 .radio-buttons label:hover,
-.radio-buttons label:checked {
+.radio-buttons:checked {
     color: #fefefe;
     transition: 0.2s;}
 .radio-buttons .slider {
@@ -370,6 +371,11 @@ db   8D 88.     88   88 88 `88. Y8b  d8 88   88
 .radio-buttons .third:checked ~ .slider {bottom: 10%; left:8%; width: 23%;}
 .radio-buttons .forth:checked ~ .slider {bottom: 10%; left: 37%; width: 25%;}
 .radio-buttons .fith:checked ~ .slider {bottom: 10%; left: 68%; width: 23%;}
+.radio-buttons .first:checked ~ .first {color: #fefefe;}
+.radio-buttons .second:checked ~ .second {color: #fefefe;}
+.radio-buttons .third:checked ~ .third {color: #fefefe;}
+.radio-buttons .forth:checked ~ .forth {color: #fefefe;}
+.radio-buttons .fith:checked ~ .fith {color: #fefefe;}
 div.center.grid-option div label:nth-child(2) {top: 20%; left: 10%}
 div.center.grid-option div label:nth-child(4) {top: 20%; right: 10%;}
 div.center.grid-option div label:nth-child(6) {bottom: 15%; left: 0%;}
