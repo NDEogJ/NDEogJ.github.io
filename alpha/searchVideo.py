@@ -631,7 +631,17 @@ Y8888D'  `Y88P'  VP   V8P Y88888P      ~Y8888P'       VP
     data = loads(req.text)
     data = data["items"][0]
     title = data["snippet"]["title"]
-    description = data["snippet"]["description"]
+    description = data["snippet"]["description"].replace('\n', ' <br> ')
+    lines = description.split(' ')
+    for line in lines:
+        if 'www' in line:
+            if 'http' in line:
+                description = description.replace(line, f"<a class='link' href='{line}'>{line}</a>")
+            else:
+                temp = 'https://' + line
+                description = description.replace(line, f"<a class='link' href='{temp}'>{line}</a>")
+        elif 'http' in line:
+            description = description.replace(line, f"<a class='link' href='{line}'>{line}</a>")
     img = data["snippet"]["thumbnails"]["medium"]["url"]
     banner = data["brandingSettings"]["image"]["bannerImageUrl"]
     uploads = data["contentDetails"]["relatedPlaylists"]["uploads"]
@@ -663,7 +673,10 @@ def GETu2():
 
 def DONEu2(req):
     data = loads(req.text)
-    Vid = data["items"][0]["contentDetails"]["videoId"]
+    try:
+        Vid = data["items"][0]["contentDetails"]["videoId"]
+    except IndexError:
+        Vid = '4EJBISsISzg'
     SHOWu(Vid)
 
 
@@ -685,14 +698,15 @@ db   8D 88   88 `8b  d8' `8b d8'8b d8'      88b  d88
     subs = Cooked[6]
     videos = Cooked[7]
     doc["list"].html = str(
-        f"<div style='overflow-x: hidden;overflow-y: scroll;margin-top: -120px;hight:auto;'><img src='{banner}' width='100%'><br>"
+        f"<div style='margin-top: 0;hight:auto;'>"
+        f"<img src='{banner}' width='100%'>"
         f"<img class='Cimg' src='{img}' width='7%'>"
         f"<p class='Ctitle'>{title}</p>"
         f"<p class='Csubs'>{subs} Subscribers</p>"
         f"<p class='Cviews'>{views} Views</p>"
         f"<p class='Cvideos'>{videos} Videos</p>"
-        f"<p class='Cdesc'>{description}</p>"
-        f"<br><a href='?vid={vid}&pid={uploads}'>UPLOADS</a></div>"
+        f"<a class='snip1339' href='?vid={vid}&pid={uploads}'>UPLOADS</a>"
+        f"<p class='Cdesc'>{description}</p></div>"
     )
     loaded(True)
 
@@ -709,7 +723,10 @@ def loaded(grid):
 88888888888  `"Y8888Y"'  d8'          `8b  88888888Y"'    88888888888  88888888Y"'
     '''
     if grid is True:
-        doc["main"].attrs["style"] = f"grid-template-rows: 5% 0% 10% 2% 75% 8%; display: grid;"
+        if cId is None:
+            doc["main"].attrs["style"] = f"grid-template-rows: 5% 0% 10% 2% 75% 8%; display: grid;"
+        elif cId is not None:
+            doc["main"].attrs["style"] = f"grid-template-rows: 5% 0% 10% 2% 75% 8%; display: grid;"
     elif grid is False:
         doc["main"].attrs["style"] = f"display: grid;"
     doc["preloader"].attrs["style"] = f"display: none;"
