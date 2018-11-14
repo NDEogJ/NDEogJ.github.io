@@ -21,14 +21,16 @@ try:
     vorc = doc.query["vorc"]
     q = doc.query["q"]
     order = doc.query["order"]
-    page = doc.query["page"]
-    pageNum = doc.query["pageNum"]
 except KeyError:
     vorc = None
     q = None
     order = None
-    page = None
-    pageNum = None
+try:
+    page = doc.query["page"]
+    pageNum = doc.query["pageNum"]
+except KeyError:
+    page = '+'
+    pageNum = 1
 try:
     vId = doc.query["vid"]
 except KeyError:
@@ -663,7 +665,7 @@ Y8888D'  `Y88P'  VP   V8P Y88888P      ~Y8888P'       VP
 
 
 def GETu2():
-    url = link(Url='u2', Id=Cooked[4])
+    url = link(Url='u2', Id=Cooked[4], Page=page)
     req = ajax.ajax()
     req.bind('complete', DONEu2)
     req.open('GET', url, True)
@@ -672,15 +674,75 @@ def GETu2():
 
 
 def DONEu2(req):
-    data = loads(req.text)
-    try:
-        Vid = data["items"][0]["contentDetails"]["videoId"]
-    except IndexError:
-        Vid = '4EJBISsISzg'
-    SHOWu(Vid)
+    if req.status == 200 or req.status == 0:
+        data = loads(req.text)
+        vIDs = []
+        for video in data.get("items", []):
+            vID = video["contentDetails"]["videoId"]
+            print(f"{vID} -- VIDEO")
+            vIDs.append(vID)
+        GETu3(vIDs)
 
 
-def SHOWu(vid):
+def GETu3(vIDs):
+    url = link(Url='u3', Id=','.join(vIDs))
+    req = ajax.ajax()
+    req.bind('complete', DONEu3)
+    req.open('GET', url, True)
+    req.set_header('content-type', 'application/x-www-form-urlencoded')
+    req.send()
+
+
+def DONEu3(req):
+    if req.status == 200 or req.status == 0:
+        data = loads(req.text)
+        vRAWs = []
+        for video in data.get("items", []):
+            vID = video["id"]
+            vLEN = video["contentDetails"]["duration"]
+            cTITLE = video["snippet"]["channelTitle"]
+            vIMG = video["snippet"]["thumbnails"]["medium"]["url"]
+            vTITLE = video["snippet"]["title"]
+            try:
+                vVIEWS = format(int(video["statistics"]["viewCount"]), ",d")
+            except KeyError:
+                vVIEWS = 'hidden'
+
+            vLEN = vLEN.strip("PT").strip("S")
+            vLEN = vLEN.replace("H", ":").replace("M", ":")
+            if vLEN.endswith(":"):
+                vLEN += "00"
+            vLEN += ":temp"
+            for x in range(10):
+                vLEN = vLEN.replace(f":{x}:", f":0{x}:")
+            vLEN = vLEN.replace(":temp", "")
+            if ":" not in vLEN:
+                vLEN = f"0:{vLEN}"
+            if vLEN == '0:0':
+                vLEN = "LIVE"
+            print(f"{vID} -- VIDEO -- {vLEN.split()} -- {vTITLE}")
+            vRAWs.append(f"<li class='video'><a href='?vid={vID}&pid={Cooked[4]}'>"
+                         f"<div class='img'><img src='{vIMG}' height='120px' width='210px'>"
+                         f"<time> {vLEN} </time></div>"
+                         f"<p class='title'>{vTITLE}</p></a>"
+                         f"<p class='channel'>{cTITLE}"
+                         f"<br>{vVIEWS} Views</p>"
+                         f"</li>")
+        global vSTRs
+        vSTRs = "".join(vRAWs)
+        global nextPAGE, prevPAGE, nextPAGEnum, prevPAGEnum
+        nextPAGE = data.get("nextPageToken")
+        prevPAGE = data.get("prevPageToken")
+        nextPAGEnum = str(int(pageNum) + 1)
+        if pageNum == "1":
+            prevPAGEnum = "1"
+        elif pageNum != "1":
+            prevPAGEnum = str(int(pageNum) - 1)
+        if prevPAGE is None:
+            prevPAGE = ' '
+        SHOWu()
+
+def SHOWu():
     '''
 .d8888. db   db  .d88b.  db   d8b   db      db    db
 88'  YP 88   88 .8P  Y8. 88   I8I   88      88    88
@@ -705,8 +767,33 @@ db   8D 88   88 `8b  d8' `8b d8'8b d8'      88b  d88
         f"<p class='Csubs'>{subs} Subscribers</p>"
         f"<p class='Cviews'>{views} Views</p>"
         f"<p class='Cvideos'>{videos} Videos</p>"
-        f"<a class='snip1339' href='?vid={vid}&pid={uploads}'>UPLOADS</a>"
-        f"<p class='Cdesc'><br>{description}</p></div>")
+        f"<p class='Cdesc'><br>{description}</p>"
+        f"<ul style='"
+        f"height: 100%;"
+        f"width: 100%;"
+        f"padding-left: 0px;"
+        f"overflow: hidden;"
+        f"overflow-y: scroll;"
+        f"list-style-type: none;"
+        f"'><div class='grid-videos-container'>"
+        f"{vSTRs}"
+        f"<li></li><li></li><li>"
+        f"<form style='display: inline;'>"
+        f"<input type='hidden' name='vorc' value='{vorc}'>"
+        f"<input type='hidden' name='q' value='{q}'>"
+        f"<input type='hidden' name='order' value='{order}'>"
+        f"<input type='hidden' name='pageNum' value='{prevPAGEnum}'>"
+        f"<button type='submit' name='page' value='{prevPAGE}'>&#8249;</button>"
+        f"</form>"
+        f"<span style='display: inline;'> {pageNum} </span>"
+        f"<form style='display: inline;'>"
+        f"<input type='hidden' name='vorc' value='{vorc}'>"
+        f"<input type='hidden' name='q' value='{q}'>"
+        f"<input type='hidden' name='order' value='{order}'>"
+        f"<input type='hidden' name='pageNum' value='{nextPAGEnum}'>"
+        f"<button type='submit' name='page' value='{nextPAGE}'>&#8250;</button>"
+        f"</form></li>"
+        f"</div>")
     loaded(True)
 
 
