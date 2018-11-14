@@ -760,7 +760,7 @@ db   8D 88   88 `8b  d8' `8b d8'8b d8'      88b  d88
     subs = Cooked[6]
     videos = Cooked[7]
     doc["list"].html = str(
-        f"<div style='margin-top: 5%;height:90%;overflow-y: scroll;'>"
+        f"<div style='margin-top: 5%;height:95%;overflow-y: scroll;'>"
         f"<img src='{banner}' width='100%'>"
         f"<img class='Cimg' src='{img}' width='7%'>"
         f"<p class='Ctitle'>{title}</p>"
@@ -779,17 +779,13 @@ db   8D 88   88 `8b  d8' `8b d8'8b d8'      88b  d88
         f"{vSTRs}"
         f"<li></li><li></li><li>"
         f"<form style='display: inline;'>"
-        f"<input type='hidden' name='vorc' value='{vorc}'>"
-        f"<input type='hidden' name='q' value='{q}'>"
-        f"<input type='hidden' name='order' value='{order}'>"
+        f"<input type='hidden' name='cid' value='{cId}'>"
         f"<input type='hidden' name='pageNum' value='{prevPAGEnum}'>"
         f"<button type='submit' name='page' value='{prevPAGE}'>&#8249;</button>"
         f"</form>"
         f"<span style='display: inline;'> {pageNum} </span>"
         f"<form style='display: inline;'>"
-        f"<input type='hidden' name='vorc' value='{vorc}'>"
-        f"<input type='hidden' name='q' value='{q}'>"
-        f"<input type='hidden' name='order' value='{order}'>"
+        f"<input type='hidden' name='cid' value='{cId}'>"
         f"<input type='hidden' name='pageNum' value='{nextPAGEnum}'>"
         f"<button type='submit' name='page' value='{nextPAGE}'>&#8250;</button>"
         f"</form></li>"

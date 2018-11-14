@@ -192,6 +192,8 @@ def link(Url=None, Order=None, Q=None, Page=None, Id=None, p5=None, p6=None):
                     "contentDetails"
             f"&id={Id}"
              "&fields="
+                      "nextPageToken,"
+                      "prevPageToken,"
                       "items("
                              "id,"
                              "contentDetails/"
