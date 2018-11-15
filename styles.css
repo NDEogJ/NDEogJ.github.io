@@ -60,7 +60,7 @@ body {
     left: 0%;
     right: 0%;
     bottom: 0%;
-    grid-template-columns: repeat(3, 3fr);
+    grid-template-columns: 25% 40% 35%;
     grid-template-areas:
         "vorc search option";}
 .grid-videos-container {
@@ -229,6 +229,7 @@ Y8    8P 88    88 88oobY' 8P
     position: relative;
     height: 30px;
     width: 120px;
+    right: 70px;
     margin-left: 130px;
     background: rgba(0, 0, 0, 0.25);
     border-radius: 13px;}
@@ -585,7 +586,7 @@ Y8b  d8 88   88 88   88 88  V888 88  V888 88.     88booo.
 .Cimg {
     float: left;
     border-radius: 100px;
-    margin-left: 200px;
+    margin-left: 100px;
     margin-right: 20px;}
 .Ctitle {
     text-align: left;
@@ -604,6 +605,20 @@ Y8b  d8 88   88 88   88 88  V888 88  V888 88.     88booo.
     color: #676767;
     text-decoration: none;}
 .Cdesc a:hover {color: #cdcdcd;}
+.Csearch {
+    float: right;
+    width: 60%;
+    margin-right: 100px;}
+.Cgrid-form-container {
+    display: grid;
+    grid-area: form;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+    grid-template-columns: 60% 40%;
+    grid-template-areas:
+        "search option";}
 /*
 db    db d8888b. db       .d88b.   .d8b.  d8888b. .d8888.
 88    88 88  `8D 88      .8P  Y8. d8' `8b 88  `8D 88'  YP
