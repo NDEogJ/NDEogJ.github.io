@@ -200,7 +200,7 @@ Y8888D'  `Y88P'  VP   V8P Y88888P         YP         888888D
                 vLEN = "LIVE"
             print(f"{vID} -- VIDEO -- {vLEN.split()} -- {vTITLE}")
             vRAWs.append(f"<li class='video'><a href='?vid={vID}'>"
-                         f"<div class='img'><img src='{vIMG}' height='120px' width='210px'>"
+                         f"<div class='img'><img src='{vIMG}' height='180px' width='315px'>"
                          f"<time> {vLEN} </time></div>"
                          f"<p class='title'>{vTITLE}</p></a>"
                          f"<p class='channel'>{cTITLE}"
